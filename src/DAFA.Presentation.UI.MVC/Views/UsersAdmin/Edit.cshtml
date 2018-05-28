@@ -1,0 +1,148 @@
+﻿@model DAFA.Application.ViewModels.UserEmployeeProviderViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Edit user</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.ProviderId)
+        @Html.HiddenFor(model => model.EmployeeId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+               @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+               @Html.ValidationMessageFor(model => model.UserName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CompanyName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CompanyName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Lastname, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Lastname, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Lastname)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Gender", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.GenderId, (SelectList)ViewBag.Genders, "Please select a gender", htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BirthDate, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.BirthDate, new { @Value = Model.BirthDate.ToString("yyyy/MM/dd"), @class = "form-control input-group date" })
+                @Html.ValidationMessageFor(model => model.BirthDate)
+            </div>
+        </div>
+
+        <div class="form-horizontal">
+            <h4>User Roles</h4>
+            @if (ViewBag.RoleNames.Count == 0)
+            {
+                <hr />
+                <p>User has no roles.</p>
+            }
+            else
+            {
+                <table class="table">
+
+                    @foreach (var item in ViewBag.RoleNames)
+                    {
+                        <tr>
+                            <td>
+                                @item
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+        
+        <div class="form-horizontal">
+            <h4>User Claims</h4>
+
+            @if (ViewBag.Claims.Count == 0)
+            {
+                <hr />
+                <p>User has no claims.</p>
+            }
+            else
+            {
+                <table class="table">
+                    <tr class="table-bordered">
+                        <td>
+                            <b>Claim Name</b>
+                        </td>
+                        <td>
+                            <b>Claim Value</b>
+                        </td>
+                    </tr>
+
+                    @foreach (var item in ViewBag.Claims)
+                    {
+                        <tr>
+                            <td>
+                                @item.Type
+                            </td>
+                            <td>
+                                @item.Value
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to list", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript" language="javascript">
+        $('.input-group.date').datepicker({
+            format: "yyyy/mm/dd",
+            autoclose: true,
+            todayHighlight: true
+        });
+    </script>
+}

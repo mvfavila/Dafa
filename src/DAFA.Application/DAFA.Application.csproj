@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3F2CD304-9FFD-454D-9F83-498D3543874B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DAFA.Application</RootNamespace>
+    <AssemblyName>DAFA.Application</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppServices\BaseAppService.cs" />
+    <Compile Include="AppServices\ClientAppService.cs" />
+    <Compile Include="AppServices\EventAppService.cs" />
+    <Compile Include="AppServices\EventTypeAppService.cs" />
+    <Compile Include="AppServices\FieldAppService.cs" />
+    <Compile Include="AppServices\MenuAppService.cs" />
+    <Compile Include="AppServices\PeriodicityAppService.cs" />
+    <Compile Include="Interfaces\IBaseAppService.cs" />
+    <Compile Include="Interfaces\IClientAppService.cs" />
+    <Compile Include="Interfaces\IEventAppService.cs" />
+    <Compile Include="Interfaces\IEventTypeAppService.cs" />
+    <Compile Include="Interfaces\IFieldAppService.cs" />
+    <Compile Include="Interfaces\IMenuAppService.cs" />
+    <Compile Include="Interfaces\IPeriodicityAppService.cs" />
+    <Compile Include="Mapping\ClientMapper.cs" />
+    <Compile Include="Mapping\EventMapper.cs" />
+    <Compile Include="Mapping\EventTypeMapper.cs" />
+    <Compile Include="Mapping\FieldMapper.cs" />
+    <Compile Include="Mapping\MenuMapper.cs" />
+    <Compile Include="Mapping\PeriodicityMapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validation\ValidationAppError.cs" />
+    <Compile Include="Validation\ValidationAppResult.cs" />
+    <Compile Include="ViewModels\ClientFieldViewModel.cs" />
+    <Compile Include="ViewModels\ClientViewModel.cs" />
+    <Compile Include="ViewModels\EventTypeViewModel.cs" />
+    <Compile Include="ViewModels\EventViewModel.cs" />
+    <Compile Include="ViewModels\FieldViewModel.cs" />
+    <Compile Include="ViewModels\MenuItemViewModel.cs" />
+    <Compile Include="ViewModels\PeriodicityViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAFA.Domain\DAFA.Domain.csproj">
+      <Project>{71dca81a-c687-4568-bb2d-78972c8b7b15}</Project>
+      <Name>DAFA.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAFA.Infra.CrossCutting.Identity\DAFA.Infra.CrossCutting.Identity.csproj">
+      <Project>{95A34CFD-7D6F-453E-BA00-68E4AD1DAE82}</Project>
+      <Name>DAFA.Infra.CrossCutting.Identity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAFA.Infra.Data\DAFA.Infra.Data.csproj">
+      <Project>{BFDCEB5C-BBF8-4758-B81D-39125116F50A}</Project>
+      <Name>DAFA.Infra.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DAFA\Application\Mapping\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

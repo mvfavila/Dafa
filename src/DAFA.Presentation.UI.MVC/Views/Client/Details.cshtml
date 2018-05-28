@@ -1,0 +1,92 @@
+﻿@model DAFA.Application.ViewModels.ClientFieldViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Cliente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active, new { @disabled = "disabled" })
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ClientId }) |
+    @Html.ActionLink("Adicionar Jazida", "Create", "Field", new { clientId = Model.ClientId }, null) |
+    @Html.ActionLink("Voltar para lista", "Index")
+</p>
+
+@Html.Partial("../Field/_List")
+
+<div id="calendar"></div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        $('#calendar').eCalendar({
+            events: [
+                {
+                    title: 'Event Title 1',
+                    description: 'Description 1. Without link',
+                    datetime: new Date(2016, 9, 20, 17)
+                },
+                {
+                    title: 'Event Title 2',
+                    description: 'Description 2. Only with link opening in the same tab',
+                    datetime: new Date(2016, 9, 23, 16),
+                    url: "https://www.google.com"
+                },
+                {
+                    title: 'Event Title 2',
+                    description: 'Description 3. With link opening on new tab',
+                    datetime: new Date(2016, 9, 23, 16),
+                    url: "https://www.google.com",
+                    url_blank: true
+                },
+                {
+                    title: 'Event Title 2',
+                    description: 'Description 4. Only with link opening in the same tab',
+                    datetime: new Date(2016, 9, 23, 16),
+                    url: "https://www.google.com",
+                    url_blank: false
+                }
+            ]
+        });
+
+    </script>
+}

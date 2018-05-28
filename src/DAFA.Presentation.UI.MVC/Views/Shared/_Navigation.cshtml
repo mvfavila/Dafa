@@ -1,0 +1,7 @@
+﻿@using DAFA.Application.ViewModels
+@model IEnumerable<MenuItemViewModel>
+
+@foreach (var url in Model)
+{
+    <li>@Html.ActionLink(url.Name, url.ActionName, url.ControllerName)</li>
+}

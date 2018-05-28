@@ -1,0 +1,31 @@
+﻿@model DAFA.Application.ViewModels.ClientFieldViewModel
+
+<hr />
+<h4>Jazidas</h4>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Fields) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.CheckBoxFor(modelItem => item.Active, new { @disabled = "disabled" })
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.FieldId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.FieldId })
+        </td>
+    </tr>
+}
+
+</table>

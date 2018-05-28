@@ -1,0 +1,95 @@
+﻿@model DAFA.Presentation.UI.MVC.ViewModels.Manage.IndexViewModel
+@{
+    ViewBag.Title = "Manage your account";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4>Change your account settings</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Password:</dt>
+        <dd>
+            [
+            @if (Model.HasPassword)
+            {
+                @Html.ActionLink("Change password", "ChangePassword")
+            }
+            else
+            {
+                @Html.ActionLink("Set password for local account", "SetPassword")
+            }
+            ]
+        </dd>
+        <dt>External Logins:</dt>
+        <dd>
+            Logins Sociais: @Model.Logins.Count
+            @Html.ActionLink("[ Manage ]", "ManageLogins")
+        </dd>
+            <dt>Phone Number:</dt>
+            <dd>
+                Número do Telefone: @(Model.PhoneNumber ?? "None") [
+                @if (Model.PhoneNumber != null)
+                {
+                    @Html.ActionLink("Change", "AddPhoneNumber")
+                    @: &nbsp;|&nbsp;
+                    @Html.ActionLink("Remove", "RemovePhoneNumber")
+                }
+                else
+                {
+                    @Html.ActionLink("Add", "AddPhoneNumber")
+                }
+                ]
+            </dd>
+        <dt>Two-Factor Authentication:</dt>
+        <dd>
+
+            @if (Model.TwoFactor)
+            {
+                using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+                {
+                    @Html.AntiForgeryToken()
+                    <p>
+                        Two Factor is enabled:
+                        <input type="submit" value="Disable" class="btn btn-default"/>
+                    </p>
+                }
+            }
+            else
+            {
+                using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+                {
+                    @Html.AntiForgeryToken()
+                    <p>
+                        Two Factor is disabled:
+                        <input type="submit" value="Enable" class="btn btn-default"/>
+                    </p>
+                }
+            }
+        </dd>
+        <dt>Two-Factor Authentication:</dt>
+        <dd>
+
+            @if (Model.BrowserRemembered)
+            {
+                <form method="post" action="/Manage/ForgetBrowser">
+                    <p>
+                        This browser will be remembered for Two Factor Authentication:
+                        <input type="submit" value="Forget browser" class="btn btn-default" />
+                    </p>
+                </form>
+            }
+            else
+            {
+                <form method="post" action="/Manage/RememberBrowser">
+                    <p>
+                        This browser will not be remembered for Two Factor Authentication:
+                        <input type="submit" value="Remember browser" class="btn btn-default" />
+                    </p>
+                </form>
+            }
+        </dd>
+</dl>
+</div>
