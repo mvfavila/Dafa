@@ -75,6 +75,56 @@ namespace DAFA.Presentation.UI.MVC.Controllers
             return View(fieldViewModel);
         }
 
+        // GET: Field/Edit/5
+        [ClaimsAuthorize("EditField", "True")]
+        public ActionResult Edit(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var fieldViewModel = new FieldViewModel
+            {
+                FieldId = id.Value
+            };
+            return View(fieldViewModel);
+        }
+
+        [HttpGet]
+        [ClaimsAuthorize("EditField", "True")]
+        public JsonResult Get(Guid? id)
+        {
+            var fieldViewModel = fieldAppService.GetById((Guid)id);
+
+            return Json(fieldViewModel, JsonRequestBehavior.AllowGet);
+        }
+
+        // POST: Field/Edit/5
+        [ClaimsAuthorize("EditField", "True")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(
+            [Bind(Include = "FieldId,Name,Events,Active,ClientId")]
+            FieldViewModel fieldViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = fieldAppService.Update(fieldViewModel);
+
+                if (!result.IsValid)
+                {
+                    foreach (var validationAppError in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, validationAppError.Message);
+                    }
+                    return View(fieldViewModel);
+                }
+
+                return RedirectToAction(nameof(Details));
+            }
+            return View(fieldViewModel);
+        }
+
         // GET: Field/Details/5
         [ClaimsAuthorize("ViewField", "True")]
         public ActionResult Details(Guid? id)

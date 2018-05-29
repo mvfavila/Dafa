@@ -24,6 +24,10 @@ namespace DAFA.Presentation.UI.MVC
                       "~/Scripts/bootstrap-datepicker.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
+                        "~/Scripts/knockout-*",
+                        "~/Scripts/knockout.mapping-latest.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-datepicker.css",

@@ -1,0 +1,146 @@
+﻿@model DAFA.Application.ViewModels.FieldViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Field</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @data_bind = "value: FieldName" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <h3>Events</h3>
+
+        <table id="events" class="table">
+            <thead>
+                <tr><th>Name</th><th>Description</th><th>Date</th><th>Type</th><th></th></tr>
+            </thead>
+            <tbody data-bind="foreach: Events">
+                <tr class="clickable-row">
+                    <td data-bind="text: EventName"></td>
+                    <td data-bind="text: EventDescription"></td>
+                    <td data-bind="text: EventDate"></td>
+                    <td data-bind="text: EventType"></td>
+                    <td>
+                        <button type="button" class="btn btn-danger" data-bind="click: $parent.remove">Remove</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEventModal">Add Event</button>
+                <input type="button" value="Save" class="btn btn-default" data-bind="click: save" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/knockout")
+
+    <script type="text/javascript">
+
+        $('#events').on('click', '.clickable-row', function (event) {
+            $(this).addClass('active').siblings().removeClass('active');
+        });
+
+        var FieldViewModel = function () {
+            var self = this;
+
+            var result = GetField('@Model.FieldId');
+            console.log(result);
+
+            self.FieldName = ko.observable();
+            self.Events = ko.observableArray();
+
+            var field = {
+                Name: self.FieldName,
+                Events: self.Events
+            };
+
+            self.save = function () {
+                $.ajax({
+                    type: "POST",
+                    url: '/Field/Edit',
+                    data: ko.toJS(field),
+                    dataType: "json",
+                    success: function () {
+                        alert("Data Saved");
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert("some error");
+                    }
+                });
+            };
+
+            self.EventName = "";
+            self.EventDescription = "";
+            self.EventDate = "";
+            self.EventType = "";
+
+            self.addEvent = function () {
+                self.Events.push(ko.utils.extend({},
+                    new EventObj(self.EventName, self.EventDescription, self.EventDate, self.EventType)));
+
+                // procurar um modo melhor de zerar o objeto conta após a inclusão com sucesso
+                $("#event-name").val("");
+                $("#event-description").val("");
+                $("#event-date").val("");
+                $("#event-type").val("");
+            };
+
+            self.remove = function (row) {
+                self.Events.remove(row);
+            };
+        };
+
+        function ContaObj(name, description, date, type) {
+            var self = this;
+            self.EventName = name;
+            self.EventDescription = description;
+            self.EventDate = date;
+            self.EventType = type;
+        };
+
+        function GetField(id) {
+            $.ajax({
+                type: "GET",
+                url: '/Field/Get',
+                data: { id: id },
+                dataType: "json",
+                success: function (data) {
+                    // Do whatever needed with the object returned
+
+                    return data;
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    return null;
+                }
+            });
+        }
+
+        ko.applyBindings(new FieldViewModel());
+    </script>
+}
