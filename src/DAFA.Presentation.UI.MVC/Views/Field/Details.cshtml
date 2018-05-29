@@ -8,7 +8,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>FieldViewModel</h4>
+    <h4>Field</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -22,8 +22,9 @@
     </dl>
 </div>
 
+<h4>Events</h4>
 @if (Model.Events != null && Model.Events.Any())
-{
+{    
     <table class="table">
         <tr>
             <th>
@@ -50,16 +51,17 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.EventId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.EventId })
-                </td>
             </tr>
         }
 
     </table>
 }
+else
+{
+    <div>Nenhum evento encontrado</div>
+}
 
+<br/>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.FieldId }) |
     @Html.ActionLink("Back to List", "Index")
