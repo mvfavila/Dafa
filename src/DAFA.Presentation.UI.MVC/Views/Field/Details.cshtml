@@ -1,0 +1,67 @@
+﻿@model DAFA.Application.ViewModels.FieldViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FieldViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+</div>
+
+@if (Model.Events != null && Model.Events.Any())
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Events[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Events[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Events[0].Date)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Events)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.EventId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.EventId })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FieldId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
