@@ -74,5 +74,21 @@ namespace DAFA.Presentation.UI.MVC.Controllers
 
             return View(fieldViewModel);
         }
+
+        // GET: Field/Details/5
+        [ClaimsAuthorize("ViewField", "True")]
+        public ActionResult Details(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var fieldViewModel = fieldAppService.GetById((Guid)id);
+            if (fieldViewModel == null)
+            {
+                return HttpNotFound();
+            }
+            return View(fieldViewModel);
+        }
     }
 }
