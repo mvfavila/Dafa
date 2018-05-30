@@ -69,11 +69,10 @@
         var FieldViewModel = function () {
             var self = this;
 
-            var result = GetField('@Model.FieldId');
-            console.log(result);
-
             self.FieldName = ko.observable();
-            self.Events = ko.observableArray();
+            self.Events = ko.observableArray();            
+
+            GetField('@Model.FieldId');
 
             var field = {
                 Name: self.FieldName,
@@ -111,12 +110,16 @@
                 $("#event-type").val("");
             };
 
+            self.addEventObj = function (name, description, date, type) {
+                self.Events.push(ko.utils.extend({}, new EventObj(name, description, date, type)));
+            }
+
             self.remove = function (row) {
                 self.Events.remove(row);
             };
         };
 
-        function ContaObj(name, description, date, type) {
+        function EventObj(name, description, date, type) {
             var self = this;
             self.EventName = name;
             self.EventDescription = description;
@@ -131,9 +134,7 @@
                 data: { id: id },
                 dataType: "json",
                 success: function (data) {
-                    // Do whatever needed with the object returned
-
-                    return data;
+                    loadData(data);                    
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     return null;
@@ -141,6 +142,17 @@
             });
         }
 
-        ko.applyBindings(new FieldViewModel());
+        function loadData(data) {
+            window.vm.FieldName(data.Name);
+            for (var i = 0; i < data.Events.length; i++) {
+                var e = data.Events[i];
+                //new Date(1527708877437)
+                console.log(e.Date);
+                window.vm.addEventObj(e.Name, e.Description, e.Date, e.Type);
+            }
+        }
+
+        window.vm = new FieldViewModel();
+        ko.applyBindings(vm);
     </script>
 }
