@@ -37,10 +37,10 @@
                     <td>
                         <select class="form-control" data-bind="
                            options: $parent.EventTypes,
-                           optionsCaption: 'Choose one...',
+                           optionsText: 'text',
+                           @*value: EventType,*@
                            valueAllowUnset: true"></select>
                     </td>
-                    @*value: EventType,*@
                     <td>
                         <button type="button" class="btn btn-danger" data-bind="click: $parent.remove">Remove</button>
                     </td>
@@ -77,9 +77,10 @@
 
             self.FieldName = ko.observable();
             self.Events = ko.observableArray();   
-            self.EventTypes = ['Firt', 'Second'];
+            self.EventTypes = [];
 
             GetField('@Model.FieldId');
+            GetEventTypes();
 
             var field = {
                 Name: self.FieldName,
@@ -118,7 +119,12 @@
             };
 
             self.addEventObj = function (name, description, date, type) {
+                //self.EventType = type;
                 self.Events.push(ko.utils.extend({}, new EventObj(name, description, date, type)));
+            }
+
+            self.addEventType = function (text, value) {
+                self.EventTypes.push({ text: text, value: value});
             }
 
             self.remove = function (row) {
@@ -173,14 +179,10 @@
         }
 
         function loadEventTypes(data) {
-
-            console.log(data);
-
-            //for (var i = 0; i < data.Events.length; i++) {
-            //    var e = data.Events[i];
-            //    var formatedDate = new Date(parseInt(e.Date.slice(6, -2))).toLocaleDateString();
-            //    window.vm.addEventObj(e.Name, e.Description, formatedDate, e.Type);
-            //}
+            for (var i = 0; i < data.length; i++) {
+                var et = data[i];
+                window.vm.addEventType(et.Name, et.EventTypeId);
+            }
         }
 
         window.vm = new FieldViewModel();
