@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <h3>Events</h3>
+        <h4>Events</h4>
 
         <table id="events" class="table">
             <thead>
@@ -31,9 +31,9 @@
             </thead>
             <tbody data-bind="foreach: Events">
                 <tr class="clickable-row">
-                    <td data-bind="text: EventName"></td>
-                    <td data-bind="text: EventDescription"></td>
-                    <td data-bind="text: EventDate"></td>
+                    <td><input data-bind="value: EventName" class="form-control" /></td>
+                    <td><input data-bind="value: EventDescription" class="form-control" /></td>
+                    <td><input data-bind="value: EventDate" class="form-control" /></td>
                     <td>
                         <select class="form-control" data-bind="
                            options: $parent.EventTypes,
