@@ -34,7 +34,13 @@
                     <td data-bind="text: EventName"></td>
                     <td data-bind="text: EventDescription"></td>
                     <td data-bind="text: EventDate"></td>
-                    <td data-bind="text: EventType"></td>
+                    <td>
+                        <select class="form-control" data-bind="
+                           options: $parent.EventTypes,
+                           optionsCaption: 'Choose one...',
+                           valueAllowUnset: true"></select>
+                    </td>
+                    @*value: EventType,*@
                     <td>
                         <button type="button" class="btn btn-danger" data-bind="click: $parent.remove">Remove</button>
                     </td>
@@ -70,7 +76,8 @@
             var self = this;
 
             self.FieldName = ko.observable();
-            self.Events = ko.observableArray();            
+            self.Events = ko.observableArray();   
+            self.EventTypes = ['Firt', 'Second'];
 
             GetField('@Model.FieldId');
 
@@ -149,6 +156,31 @@
                 var formatedDate = new Date(parseInt(e.Date.slice(6, -2))).toLocaleDateString();
                 window.vm.addEventObj(e.Name, e.Description, formatedDate, e.Type);
             }
+        }
+
+        function GetEventTypes() {
+            $.ajax({
+                type: "GET",
+                url: '/EventType/GetAll',
+                dataType: "json",
+                success: function (data) {
+                    loadEventTypes(data);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    return null;
+                }
+            });
+        }
+
+        function loadEventTypes(data) {
+
+            console.log(data);
+
+            //for (var i = 0; i < data.Events.length; i++) {
+            //    var e = data.Events[i];
+            //    var formatedDate = new Date(parseInt(e.Date.slice(6, -2))).toLocaleDateString();
+            //    window.vm.addEventObj(e.Name, e.Description, formatedDate, e.Type);
+            //}
         }
 
         window.vm = new FieldViewModel();

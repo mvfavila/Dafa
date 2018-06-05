@@ -90,15 +90,6 @@ namespace DAFA.Presentation.UI.MVC.Controllers
             return View(fieldViewModel);
         }
 
-        [HttpGet]
-        [ClaimsAuthorize("EditField", "True")]
-        public JsonResult Get(Guid? id)
-        {
-            var fieldViewModel = fieldAppService.GetById((Guid)id);
-
-            return Json(fieldViewModel, JsonRequestBehavior.AllowGet);
-        }
-
         // POST: Field/Edit/5
         [ClaimsAuthorize("EditField", "True")]
         [HttpPost]
@@ -140,5 +131,18 @@ namespace DAFA.Presentation.UI.MVC.Controllers
             }
             return View(fieldViewModel);
         }
+
+        #region Extension methods
+
+        [HttpGet]
+        [ClaimsAuthorize("EditField", "True")]
+        public JsonResult Get(Guid? id)
+        {
+            var fieldViewModel = fieldAppService.GetById((Guid)id);
+
+            return Json(fieldViewModel, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
     }
 }

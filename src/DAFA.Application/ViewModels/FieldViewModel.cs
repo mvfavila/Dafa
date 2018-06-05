@@ -17,7 +17,7 @@ namespace DAFA.Application.ViewModels
                 {
                     EventId = Guid.NewGuid(),
                     Name = "Event #1",
-                    Description = "Desscription of event #1",
+                    Description = "Description of event #1",
                     Date = DateTime.Now,
                     EventTypeId = Guid.Parse("7a1a3567-9cd5-41ff-8f17-e76bdc207f69")
                 },
@@ -25,7 +25,7 @@ namespace DAFA.Application.ViewModels
                 {
                     EventId = Guid.NewGuid(),
                     Name = "Event #2",
-                    Description = "Desscription of event #2",
+                    Description = "Description of event #2",
                     Date = DateTime.Now.AddDays(2),
                     EventTypeId = Guid.Parse("7a1a3567-9cd5-41ff-8f17-e76bdc207f69")
                 }

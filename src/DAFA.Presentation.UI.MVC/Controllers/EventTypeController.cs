@@ -116,5 +116,18 @@ namespace DAFA.Presentation.UI.MVC.Controllers
             }
             return View(eventTypeViewModel);
         }
+
+        #region Extension methods
+
+        [HttpGet]
+        [ClaimsAuthorize("ViewEventType", "True")]
+        public JsonResult GetAll()
+        {
+            var eventTypeViewModels = eventTypeAppService.GetAll();
+
+            return Json(eventTypeViewModels, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
     }
 }
