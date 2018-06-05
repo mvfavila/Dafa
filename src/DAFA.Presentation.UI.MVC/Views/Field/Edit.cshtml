@@ -38,7 +38,8 @@
                         <select class="form-control" data-bind="
                            options: $parent.EventTypes,
                            optionsText: 'text',
-                           @*value: EventType,*@
+                           optionsValue: 'value',
+                           value: EventType,
                            valueAllowUnset: true"></select>
                     </td>
                     <td>
@@ -119,7 +120,6 @@
             };
 
             self.addEventObj = function (name, description, date, type) {
-                //self.EventType = type;
                 self.Events.push(ko.utils.extend({}, new EventObj(name, description, date, type)));
             }
 
@@ -160,7 +160,7 @@
             for (var i = 0; i < data.Events.length; i++) {
                 var e = data.Events[i];
                 var formatedDate = new Date(parseInt(e.Date.slice(6, -2))).toLocaleDateString();
-                window.vm.addEventObj(e.Name, e.Description, formatedDate, e.Type);
+                window.vm.addEventObj(e.Name, e.Description, formatedDate, e.EventTypeId);
             }
         }
 
