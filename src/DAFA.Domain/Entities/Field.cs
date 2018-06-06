@@ -35,12 +35,13 @@ namespace DAFA.Domain.Entities
             return true;
         }
 
-        public static Field FactoryMap(Guid fieldId, string name, Guid clientId, bool active)
+        public static Field FactoryMap(Guid fieldId, string name, IList<Event> events, Guid clientId, bool active)
         {
             return new Field
             {
                 FieldId = fieldId,
                 Name = name,
+                Events = events,
                 ClientId = clientId,
                 Active = active
             };

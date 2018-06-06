@@ -31,15 +31,15 @@
             </thead>
             <tbody data-bind="foreach: Events">
                 <tr class="clickable-row">
-                    <td><input data-bind="value: EventName" class="form-control" /></td>
-                    <td><input data-bind="value: EventDescription" class="form-control" /></td>
-                    <td><input data-bind="value: EventDate" class="form-control" /></td>
+                    <td><input data-bind="value: Name" class="form-control" /></td>
+                    <td><input data-bind="value: Description" class="form-control" /></td>
+                    <td><input data-bind="value: Date" class="form-control" /></td>
                     <td>
                         <select class="form-control" data-bind="
                            options: $parent.EventTypes,
                            optionsText: 'text',
                            optionsValue: 'value',
-                           value: EventType,
+                           value: EventTypeId,
                            valueAllowUnset: true"></select>
                     </td>
                     <td>
@@ -50,8 +50,8 @@
         </table>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEventModal">Add Event</button>
+            <div class="col-md-10">
+                <button type="button" class="btn btn-primary" data-bind="click: addEvent">Add Event</button>
                 <input type="button" value="Save" class="btn btn-default" data-bind="click: save" />
             </div>
         </div>
@@ -61,62 +61,6 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-@*=============== Modal ==============*@
-<div class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Event</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        @Html.Label("Name", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.Editor("EventName", new { htmlAttributes = new { @id = "event-name", @class = "form-control", @data_bind = "value: EventName" } })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.Label("Description", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.Editor("EventDescription", new { htmlAttributes = new { @id = "event-description", @class = "form-control", @data_bind = "value: EventDescription" } })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.Label("Date", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.Editor("EventDate", new { htmlAttributes = new { @id = "event-date", @class = "form-control", @data_bind = "value: EventDate" } })
-                        </div>
-                    </div>
-
-                    <div class="form-control">
-                        @Html.Label("Type", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            <select class="form-control" id="event-type" data-bind="
-                               options: $root.EventTypes,
-                               optionsText: 'text',
-                               optionsValue: 'value',
-                               value: EventType,
-                               valueAllowUnset: true"></select>
-                        </div>
-                    </div>
-                </form>
-                <br/>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bind="click: addEvent">Add Event</button>
-            </div>
-        </div>
-    </div>
-</div>
-@*=============== Modal ==============*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jquery")
@@ -134,49 +78,62 @@
 
             self.FieldName = ko.observable();
             self.Events = ko.observableArray();
-            self.EventTypes = [];
+            self.EventTypes = ko.observableArray([]);
+            self.ClientId = ko.observable();
 
             GetField('@Model.FieldId');
             GetEventTypes();
 
             var field = {
+                FieldId: '@Model.FieldId',
                 Name: self.FieldName,
-                Events: self.Events
+                Events: self.Events(),
+                Active: '@Model.Active',
+                ClientId: self.ClientId
             };
 
             self.save = function () {
+                //console.log('Field');
+                console.log(field);
+                //console.log('=========');
                 $.ajax({
                     type: "POST",
                     url: '/Field/Edit',
                     data: ko.toJS(field),
                     dataType: "json",
-                    success: function () {
+                    success: function (data) {
                         alert("Data Saved");
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        //console.log('Erro');
+                        //console.log('XMLHttpRequest: ');
+                        //console.log(XMLHttpRequest.responseText);
+                        //console.log('textStatus: ' + textStatus);
+                        //console.log('errorThrown: ' + errorThrown);
                         alert("some error");
                     }
                 });
             };
 
-            self.EventName = "";
-            self.EventDescription = "";
-            self.EventDate = "";
-            self.EventType = "";
+            self.Name = "";
+            self.Description = "";
+            self.Date = "";
+            self.EventTypeId = "";
 
             self.addEvent = function () {
+                var eventId = uuidv4();
                 self.Events.push(ko.utils.extend({},
-                    new EventObj(self.EventName, self.EventDescription, self.EventDate, self.EventType)));
+                    new EventObj(eventId, self.Name, self.Description, self.Date, self.EventTypeId)));
 
                 // procurar um modo melhor de zerar o objeto conta após a inclusão com sucesso
-                $("#event-name").val("");
-                $("#event-description").val("");
-                $("#event-date").val("");
-                $("#event-type").val("");
+                //$("#event-name").val("");
+                //$("#event-description").val("");
+                //$("#event-date").val("");
+                //$("#event-type").val("");
             };
 
-            self.addEventObj = function (name, description, date, type) {
-                self.Events.push(ko.utils.extend({}, new EventObj(name, description, date, type)));
+            self.addEventObj = function (eventId, name, description, date, type) {
+                self.Events.push(ko.utils.extend({}, new EventObj(eventId, name, description, date, type)));
             }
 
             self.addEventType = function (text, value) {
@@ -188,12 +145,13 @@
             };
         };
 
-        function EventObj(name, description, date, type) {
+        function EventObj(id, name, description, date, type) {
             var self = this;
-            self.EventName = name;
-            self.EventDescription = description;
-            self.EventDate = date;
-            self.EventType = type;
+            self.EventId = id;
+            self.Name = name;
+            self.Description = description;
+            self.Date = date;
+            self.EventTypeId = type;
         };
 
         function GetField(id) {
@@ -213,10 +171,11 @@
 
         function loadData(data) {
             window.vm.FieldName(data.Name);
+            window.vm.ClientId(data.ClientId);
             for (var i = 0; i < data.Events.length; i++) {
                 var e = data.Events[i];
                 var formatedDate = new Date(parseInt(e.Date.slice(6, -2))).toLocaleDateString();
-                window.vm.addEventObj(e.Name, e.Description, formatedDate, e.EventTypeId);
+                window.vm.addEventObj(e.EventId, e.Name, e.Description, formatedDate, e.EventTypeId);
             }
         }
 
@@ -239,6 +198,13 @@
                 var et = data[i];
                 window.vm.addEventType(et.Name, et.EventTypeId);
             }
+        }
+
+        function uuidv4() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
         }
 
         window.vm = new FieldViewModel();

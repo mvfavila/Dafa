@@ -1,5 +1,6 @@
 ﻿using DAFA.Application.ViewModels;
 using DAFA.Domain.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace DAFA.Application.Mapping
@@ -16,6 +17,18 @@ namespace DAFA.Application.Mapping
                 eventViewModel.Date,
                 eventViewModel.EventTypeId
                 );
+        }
+
+        internal static IList<Event> FromViewModelToDomain(IList<EventViewModel> eventViewModels)
+        {
+            var events = new List<Event>();
+
+            foreach (var ev in eventViewModels)
+            {
+                events.Add(FromViewModelToDomain(ev));
+            }
+
+            return events;
         }
 
         internal static EventViewModel FromDomainToViewModel(Event eventObj)

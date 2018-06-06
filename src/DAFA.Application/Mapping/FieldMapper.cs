@@ -13,6 +13,7 @@ namespace DAFA.Application.Mapping
             return Field.FactoryMap(
                 fieldViewModel.FieldId,
                 fieldViewModel.Name,
+                EventMapper.FromViewModelToDomain(fieldViewModel.Events),
                 fieldViewModel.ClientId,
                 fieldViewModel.Active
                 );

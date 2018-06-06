@@ -91,11 +91,11 @@ namespace DAFA.Presentation.UI.MVC.Controllers
         }
 
         // POST: Field/Edit/5
-        [ClaimsAuthorize("EditField", "True")]
+        //[ClaimsAuthorize("EditField", "True")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(
-            [Bind(Include = "FieldId,Name,Events,Active,ClientId")]
+        //[ValidateAntiForgeryToken]
+        public JsonResult Edit(
+            //[Bind(Include = "FieldId,Name,Events,Active,ClientId")]
             FieldViewModel fieldViewModel)
         {
             if (ModelState.IsValid)
@@ -108,12 +108,9 @@ namespace DAFA.Presentation.UI.MVC.Controllers
                     {
                         ModelState.AddModelError(string.Empty, validationAppError.Message);
                     }
-                    return View(fieldViewModel);
                 }
-
-                return RedirectToAction(nameof(Details));
             }
-            return View(fieldViewModel);
+            return Json(fieldViewModel);
         }
 
         // GET: Field/Details/5
