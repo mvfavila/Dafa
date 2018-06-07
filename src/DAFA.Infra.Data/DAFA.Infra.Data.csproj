@@ -80,6 +80,10 @@
     <Compile Include="Migrations\201803251927519_20180325 - Entitites configuration files added.Designer.cs">
       <DependentUpon>201803251927519_20180325 - Entitites configuration files added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806070835142_20180607-More DbSets added to context.cs" />
+    <Compile Include="Migrations\201806070835142_20180607-More DbSets added to context.Designer.cs">
+      <DependentUpon>201806070835142_20180607-More DbSets added to context.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
@@ -112,6 +116,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201803251927519_20180325 - Entitites configuration files added.resx">
       <DependentUpon>201803251927519_20180325 - Entitites configuration files added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806070835142_20180607-More DbSets added to context.resx">
+      <DependentUpon>201806070835142_20180607-More DbSets added to context.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

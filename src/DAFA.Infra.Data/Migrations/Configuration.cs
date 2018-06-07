@@ -18,10 +18,12 @@ namespace DAFA.Infra.Data.Migrations
 
             #region EventType
             var eventType30Dias = EventType.FactorySeed("7a1a3567-9cd5-41ff-8f17-e76bdc207f69", "30 dias para aviso", 30, true);
+            var eventType60Dias = EventType.FactorySeed("6f21d3b8-3de2-416a-b654-b25e1e6cb7f9", "60 dias para aviso", 60, true);
 
             context.EventTypes.AddOrUpdate(
                 e => e.EventTypeId,
-                eventType30Dias
+                eventType30Dias,
+                eventType60Dias
                 );
             #endregion
 

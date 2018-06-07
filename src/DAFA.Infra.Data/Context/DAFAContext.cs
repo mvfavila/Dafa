@@ -22,6 +22,7 @@ namespace DAFA.Infra.Data.Context
         }
 
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Field> Fields { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<EventType> EventTypes { get; set; }
         public DbSet<Periodicity> Periodicities { get; set; }
@@ -51,6 +52,9 @@ namespace DAFA.Infra.Data.Context
                 .Configure(p => p.HasMaxLength(STANDARD_VARCHAR_COLUMN_MAX_SIZE));
 
             // Mappings
+            modelBuilder.Configurations.Add(new ClientConfiguration());
+            modelBuilder.Configurations.Add(new FieldConfiguration());
+            modelBuilder.Configurations.Add(new EventConfiguration());
             modelBuilder.Configurations.Add(new EventTypeConfiguration());
             modelBuilder.Configurations.Add(new PeriodicityConfiguration());
 
