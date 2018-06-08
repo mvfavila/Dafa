@@ -15,6 +15,7 @@ namespace DAFA.Application.Mapping
                 eventViewModel.Name,
                 eventViewModel.Description,
                 eventViewModel.Date,
+                eventViewModel.FieldId,
                 eventViewModel.EventTypeId
                 );
         }
@@ -39,6 +40,7 @@ namespace DAFA.Application.Mapping
                 Name = eventObj.Name,
                 Description = eventObj.Description,
                 Date = eventObj.Date,
+                FieldId = eventObj.FieldId,
                 EventTypeId = eventObj.EventTypeId
             };
         }

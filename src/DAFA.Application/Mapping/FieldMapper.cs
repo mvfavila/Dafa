@@ -1,6 +1,7 @@
 ﻿using DAFA.Application.ViewModels;
 using DAFA.Domain.Entities;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DAFA.Application.Mapping
 {
@@ -25,6 +26,7 @@ namespace DAFA.Application.Mapping
             {
                 FieldId = fieldObj.FieldId,
                 Name = fieldObj.Name,
+                Events = EventMapper.FromDomainToViewModel(fieldObj.Events).ToList(),
                 ClientId = fieldObj.ClientId,
                 Active = fieldObj.Active
             };

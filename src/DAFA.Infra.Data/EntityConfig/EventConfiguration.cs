@@ -22,6 +22,13 @@ namespace DAFA.Infra.Data.EntityConfig
             Property(e => e.Date)
                 .IsRequired();
 
+            Property(e => e.FieldId)
+                .IsRequired();
+
+            HasRequired(e => e.Field)
+                .WithMany(f => f.Events)
+                .HasForeignKey(e => e.FieldId);
+
             Property(e => e.EventTypeId)
                 .IsRequired();
 

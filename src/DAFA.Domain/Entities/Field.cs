@@ -7,7 +7,12 @@ namespace DAFA.Domain.Entities
 {
     public class Field : ISelfValidator
     {
-        private Field() { ValidationResult = new ValidationResult(); }
+        private Field()
+        {
+            Events = new List<Event>();
+            Registrations = new List<Registration>();
+            ValidationResult = new ValidationResult();
+        }
 
         public Guid FieldId { get; private set; }
 
@@ -42,6 +47,17 @@ namespace DAFA.Domain.Entities
                 FieldId = fieldId,
                 Name = name,
                 Events = events,
+                ClientId = clientId,
+                Active = active
+            };
+        }
+
+        public static Field FactorySeed(string fieldId, string name, Guid clientId, bool active)
+        {
+            return new Field
+            {
+                FieldId = Guid.Parse(fieldId),
+                Name = name,
                 ClientId = clientId,
                 Active = active
             };

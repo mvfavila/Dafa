@@ -9,7 +9,8 @@ namespace DAFA.Application.ViewModels
         public EventViewModel()
         {
             EventId = Guid.NewGuid();
-            EventTypeId = Guid.NewGuid();          
+            FieldId = Guid.NewGuid();
+            EventTypeId = Guid.NewGuid();
         }
 
         [ScaffoldColumn(false)]
@@ -27,6 +28,9 @@ namespace DAFA.Application.ViewModels
 
         [Display(Name = "Data")]
         public DateTime Date { get; set; }
+
+        [ScaffoldColumn(false)]
+        public Guid FieldId { get; set; }
 
         [ScaffoldColumn(false)]
         public Guid EventTypeId { get; set; }

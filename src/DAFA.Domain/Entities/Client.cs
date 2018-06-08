@@ -43,5 +43,17 @@ namespace DAFA.Domain.Entities
                 Active = active
             };
         }
+
+        public static Client FactorySeed(string clientId, string name, string email, string phone, bool active)
+        {
+            return new Client
+            {
+                ClientId = Guid.Parse(clientId),
+                Name = name,
+                Email = email,
+                Phone = phone,
+                Active = active
+            };
+        }
     }
 }

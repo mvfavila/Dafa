@@ -9,12 +9,13 @@ namespace DAFA.Domain.Entities
     {
         private Event() { ValidationResult = new ValidationResult(); }
 
-        private Event(Guid eventId, string name, string description, DateTime date, Guid eventTypeId)
+        private Event(Guid eventId, string name, string description, DateTime date, Guid fieldId, Guid eventTypeId)
         {
             EventId = eventId;
             Name = name;
             Description = description;
             Date = date;
+            FieldId = fieldId;
             EventTypeId = eventTypeId;
             ValidationResult = new ValidationResult();
         }
@@ -26,6 +27,10 @@ namespace DAFA.Domain.Entities
         public string Description { get; private set; }
 
         public DateTime Date { get; private set; }
+
+        public Guid FieldId { get; private set; }
+
+        public virtual Field Field { get; private set; }
 
         public Guid EventTypeId { get; private set; }
 
@@ -46,15 +51,15 @@ namespace DAFA.Domain.Entities
         }
 
         public static Event FactoryMap(
-            Guid eventId, string name, string description, DateTime date, Guid eventTypeId)
+            Guid eventId, string name, string description, DateTime date, Guid fieldId, Guid eventTypeId)
         {
-            return new Event(eventId, name, description, date, eventTypeId);
+            return new Event(eventId, name, description, date, fieldId, eventTypeId);
         }
 
         public static Event FactorySeed(
-            string eventId, string name, string description, DateTime date,Guid eventTypeId)
+            string eventId, string name, string description, DateTime date, Guid fieldId, Guid eventTypeId)
         {
-            return new Event(Guid.Parse(eventId), name, description, date, eventTypeId);
+            return new Event(Guid.Parse(eventId), name, description, date, fieldId, eventTypeId);
         }
     }
 }
