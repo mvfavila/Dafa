@@ -15,6 +15,7 @@
         <h4>Field</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.FieldId, new { @data_bind = "value: FieldId" })
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -80,6 +81,7 @@
             self.Events = ko.observableArray();
             self.EventTypes = ko.observableArray([]);
             self.ClientId = ko.observable();
+            self.FieldId = ko.observable();
 
             GetField('@Model.FieldId');
             GetEventTypes();
@@ -123,17 +125,11 @@
             self.addEvent = function () {
                 var eventId = uuidv4();
                 self.Events.push(ko.utils.extend({},
-                    new EventObj(eventId, self.Name, self.Description, self.Date, self.EventTypeId)));
-
-                // procurar um modo melhor de zerar o objeto conta após a inclusão com sucesso
-                //$("#event-name").val("");
-                //$("#event-description").val("");
-                //$("#event-date").val("");
-                //$("#event-type").val("");
+                    new EventObj(eventId, self.Name, self.Description, self.Date, self.EventTypeId), self.FieldId));
             };
 
-            self.addEventObj = function (eventId, name, description, date, type) {
-                self.Events.push(ko.utils.extend({}, new EventObj(eventId, name, description, date, type)));
+            self.addEventObj = function (eventId, name, description, date, type, fieldId) {
+                self.Events.push(ko.utils.extend({}, new EventObj(eventId, name, description, date, type, fieldId)));
             }
 
             self.addEventType = function (text, value) {
@@ -145,13 +141,14 @@
             };
         };
 
-        function EventObj(id, name, description, date, type) {
+        function EventObj(id, name, description, date, type, fieldId) {
             var self = this;
             self.EventId = id;
             self.Name = name;
             self.Description = description;
             self.Date = date;
             self.EventTypeId = type;
+            self.FieldId = fieldId;
         };
 
         function GetField(id) {
@@ -175,7 +172,7 @@
             for (var i = 0; i < data.Events.length; i++) {
                 var e = data.Events[i];
                 var formatedDate = new Date(parseInt(e.Date.slice(6, -2))).toLocaleDateString();
-                window.vm.addEventObj(e.EventId, e.Name, e.Description, formatedDate, e.EventTypeId);
+                window.vm.addEventObj(e.EventId, e.Name, e.Description, formatedDate, e.EventTypeId, e.FieldId);
             }
         }
 
