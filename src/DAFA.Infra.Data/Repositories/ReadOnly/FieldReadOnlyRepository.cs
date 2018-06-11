@@ -17,7 +17,7 @@ namespace DAFA.Infra.Data.Repositories.ReadOnly
             var context = ((DAFAContext)base.context);
 
             return context.Fields
-                .Where(f => f.FieldId == id)
+                .Where(f => f.FieldId == id && f.Active)
                 .Include(f => f.Events)
                 .SingleOrDefault();
         }
