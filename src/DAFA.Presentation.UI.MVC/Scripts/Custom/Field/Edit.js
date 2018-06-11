@@ -128,5 +128,10 @@ function uuidv4() {
     });
 }
 
+function itemId() {
+    var clientId = window.vm.ClientId();
+    return clientId;
+};
+
 window.vm = new FieldViewModel();
 ko.applyBindings(vm);
