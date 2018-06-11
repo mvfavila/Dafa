@@ -27,6 +27,8 @@ namespace DAFA.Application.ViewModels
         public string Description { get; set; }
 
         [Display(Name = "Data")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
         [ScaffoldColumn(false)]

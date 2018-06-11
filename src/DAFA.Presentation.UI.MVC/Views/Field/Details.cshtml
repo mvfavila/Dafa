@@ -64,6 +64,6 @@ else
 <br/>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.FieldId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Details", "Client", new { id = Model.ClientId }, null)
 </p>
 
