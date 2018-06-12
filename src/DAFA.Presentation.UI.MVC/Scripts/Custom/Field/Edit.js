@@ -51,11 +51,11 @@ var FieldViewModel = function () {
 
     self.addEventObj = function (eventId, name, description, date, type, fieldId) {
         self.Events.push(ko.utils.extend({}, new EventObj(eventId, name, description, date, type, fieldId)));
-    }
+    };
 
     self.addEventType = function (text, value) {
         self.EventTypes.push({ text: text, value: value });
-    }
+    };
 
     self.remove = function (row) {
         self.Events.remove(row);
@@ -70,7 +70,7 @@ function EventObj(id, name, description, date, type, fieldId) {
     self.Date = date;
     self.EventTypeId = type;
     self.FieldId = fieldId;
-};
+}
 
 function GetField() {
     var fieldId = $("#field-id").val();
@@ -123,7 +123,7 @@ function loadEventTypes(data) {
 
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        var r = Math.random() * 16 | 0, v = c === 'x' ? r : r & 0x3 | 0x8;
         return v.toString(16);
     });
 }
@@ -131,7 +131,7 @@ function uuidv4() {
 function itemId() {
     var clientId = window.vm.ClientId();
     return clientId;
-};
+}
 
 window.vm = new FieldViewModel();
 ko.applyBindings(vm);
