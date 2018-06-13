@@ -36,6 +36,7 @@
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\Event.cs" />
     <Compile Include="Entities\EventType.cs" />
+    <Compile Include="Entities\EventWarning.cs" />
     <Compile Include="Entities\Field.cs" />
     <Compile Include="Entities\MenuItem.cs" />
     <Compile Include="Entities\Periodicity.cs" />

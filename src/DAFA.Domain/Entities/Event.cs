@@ -17,6 +17,7 @@ namespace DAFA.Domain.Entities
             Date = date;
             FieldId = fieldId;
             EventTypeId = eventTypeId;
+            EventWarnings = new List<EventWarning>();
             ValidationResult = new ValidationResult();
         }
 
@@ -37,6 +38,8 @@ namespace DAFA.Domain.Entities
         public virtual EventType EventType { get; private set; }
 
         public virtual ICollection<Registration> Registrations { get; private set; }
+
+        public virtual ICollection<EventWarning> EventWarnings { get; private set; }
 
         public ValidationResult ValidationResult { get; private set; }
 

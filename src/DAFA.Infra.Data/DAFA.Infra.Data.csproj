@@ -70,6 +70,7 @@
     <Compile Include="EntityConfig\ClientConfiguration.cs" />
     <Compile Include="EntityConfig\EventConfiguration.cs" />
     <Compile Include="EntityConfig\EventTypeConfiguration.cs" />
+    <Compile Include="EntityConfig\EventWarningConfiguration.cs" />
     <Compile Include="EntityConfig\FieldConfiguration.cs" />
     <Compile Include="EntityConfig\PeriodicityConfiguration.cs" />
     <Compile Include="EntityConfig\RegistrationConfiguration.cs" />
