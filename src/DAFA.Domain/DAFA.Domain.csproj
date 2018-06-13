@@ -45,12 +45,14 @@
     <Compile Include="Interfaces\Repository\IClientRepository.cs" />
     <Compile Include="Interfaces\Repository\IEventRepository.cs" />
     <Compile Include="Interfaces\Repository\IEventTypeRepository.cs" />
+    <Compile Include="Interfaces\Repository\IEventWarningRepository.cs" />
     <Compile Include="Interfaces\Repository\IFieldRepository.cs" />
     <Compile Include="Interfaces\Repository\IPeriodicityRepository.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IBaseReadOnlyRepository.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IClientReadOnlyRepository.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IEventReadOnlyRepository.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IEventTypeReadOnlyRepository.cs" />
+    <Compile Include="Interfaces\Repository\ReadOnly\IEventWarningReadOnlyRepository.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IFieldReadOnlyRepository.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IMenuReadOnlyRepository.cs" />
     <Compile Include="Interfaces\Repository\ReadOnly\IPeriodicityReadOnlyRepository.cs" />
@@ -58,6 +60,7 @@
     <Compile Include="Interfaces\Services\IClientService.cs" />
     <Compile Include="Interfaces\Services\IEventService.cs" />
     <Compile Include="Interfaces\Services\IEventTypeService.cs" />
+    <Compile Include="Interfaces\Services\IEventWarningService.cs" />
     <Compile Include="Interfaces\Services\IFieldService.cs" />
     <Compile Include="Interfaces\Services\IMenuService.cs" />
     <Compile Include="Interfaces\Services\IPeriodicityService.cs" />
@@ -70,6 +73,7 @@
     <Compile Include="Services\ClientService.cs" />
     <Compile Include="Services\EventService.cs" />
     <Compile Include="Services\EventTypeService.cs" />
+    <Compile Include="Services\EventWarningService.cs" />
     <Compile Include="Services\FieldService.cs" />
     <Compile Include="Services\MenuService.cs" />
     <Compile Include="Services\PeriodicityService.cs" />

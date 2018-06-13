@@ -17,5 +17,10 @@ namespace DAFA.Domain.Entities
         public Guid EventId { get; private set; }
 
         public virtual Event Event { get; private set; }
+
+        public void SetEvent(Event e)
+        {
+            Event = e;
+        }
     }
 }

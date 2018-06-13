@@ -95,12 +95,14 @@
     <Compile Include="Repositories\ClientRepository.cs" />
     <Compile Include="Repositories\EventRepository.cs" />
     <Compile Include="Repositories\EventTypeRepository.cs" />
+    <Compile Include="Repositories\EventWarningRepository.cs" />
     <Compile Include="Repositories\FieldRepository.cs" />
     <Compile Include="Repositories\PeriodicityRepository.cs" />
     <Compile Include="Repositories\ReadOnly\BaseReadOnlyRepository.cs" />
     <Compile Include="Repositories\ReadOnly\ClientReadOnlyRepository.cs" />
     <Compile Include="Repositories\ReadOnly\EventReadOnlyRepository.cs" />
     <Compile Include="Repositories\ReadOnly\EventTypeReadOnlyRepository.cs" />
+    <Compile Include="Repositories\ReadOnly\EventWarningReadOnlyRepository.cs" />
     <Compile Include="Repositories\ReadOnly\FieldReadOnlyRepository.cs" />
     <Compile Include="Repositories\ReadOnly\MenuReadOnlyRepository.cs" />
     <Compile Include="Repositories\ReadOnly\PeriodicityReadOnlyRepository.cs" />
