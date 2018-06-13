@@ -5,16 +5,14 @@ using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace DAFA.Infra.CrossCutting.Identity.Configuration
 {
-    public class EmailService : IIdentityMessageService
+    public class EmailService : IIdentityMessageService, IDisposable
     {
         public Task SendAsync(IdentityMessage message)
         {
-            //return ConfigSendGridasync(message);
-            return SendMail(message);
+            return SendMailAsync(message);
         }
 
         /// <summary>
@@ -22,30 +20,39 @@ namespace DAFA.Infra.CrossCutting.Identity.Configuration
         /// </summary>
         /// <param name="message">See <see cref="IdentityMessage"/>.</param>
         /// <returns>E-mail task.</returns>
-        private Task SendMail(IdentityMessage message)
+        private static Task SendMailAsync(IdentityMessage message)
         {
             if (ConfigurationManager.AppSettings["Internet"] == "true")
             {
-                var text = HttpUtility.HtmlEncode(message.Body);
-
-                var msg = new MailMessage();
-                msg.From = new MailAddress("admin@dafa.com", "DAFA Administrator");
+                var msg = new MailMessage
+                {
+                    From = new MailAddress("admin@dafa.com", "DAFA Administrator"),
+                    Subject = message.Subject,
+                    IsBodyHtml = true
+                };
                 msg.To.Add(new MailAddress(message.Destination));
-                msg.Subject = message.Subject;
-                msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null,
+                msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(message.Body, null,
                     MediaTypeNames.Text.Plain));
-                msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null,
+                msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(message.Body, null,
                     MediaTypeNames.Text.Html));
 
-                var smtpClient = new SmtpClient("smtp.provider.com", Convert.ToInt32(587));
                 var credentials = new NetworkCredential(ConfigurationManager.AppSettings["EmailAccount"],
                     ConfigurationManager.AppSettings["EmailPassword"]);
-                smtpClient.Credentials = credentials;
-                smtpClient.EnableSsl = true;
-                smtpClient.Send(msg);
+
+                using(var smtpClient = new SmtpClient("smtp.gmail.com", Convert.ToInt32(587)))
+                {
+                    smtpClient.Credentials = credentials;
+                    smtpClient.EnableSsl = true;
+                    smtpClient.Send(msg);
+                }
             }
 
             return Task.FromResult(0);
+        }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
         }
     }
 }

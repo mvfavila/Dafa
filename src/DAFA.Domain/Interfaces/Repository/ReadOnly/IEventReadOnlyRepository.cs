@@ -6,5 +6,7 @@ namespace DAFA.Domain.Interfaces.Repository.ReadOnly
     public interface IEventReadOnlyRepository : IBaseReadOnlyRepository<Event>
     {
         IEnumerable<Event> GetActive();
+
+        IEnumerable<Event> GetOverdueEvents();
     }
 }

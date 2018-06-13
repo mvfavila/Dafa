@@ -19,5 +19,7 @@ namespace DAFA.Application.Interfaces
         ValidationAppResult Update(EventViewModel eventTypeViewModel);
 
         void Remove(Guid id);
+
+        void SendEventWarnings();
     }
 }

@@ -50,6 +50,11 @@ namespace DAFA.Domain.Entities
             return true;
         }
 
+        public void SetField(Field field)
+        {
+            Field = field;
+        }
+
         public static Event FactoryMap(
             Guid eventId, string name, string description, DateTime date, Guid fieldId, Guid eventTypeId)
         {

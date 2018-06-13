@@ -4,8 +4,15 @@ namespace DAFA.Presentation.UI.MVC.Controllers
 {
     public class HomeController : Controller
     {
+        private static StartupTimer timer;
+
         public ActionResult Index()
         {
+            if(timer == null)
+            {
+                timer = new StartupTimer();
+                timer.StartEventWarningWatcher();
+            }
             return View();
         }
 

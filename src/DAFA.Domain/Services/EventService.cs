@@ -84,5 +84,10 @@ namespace DAFA.Domain.Services
 
             return validationResult;
         }
+
+        public IEnumerable<Event> GetOverdueEvents()
+        {
+            return eventReadOnlyRepository.GetOverdueEvents();
+        }
     }
 }

@@ -2,14 +2,19 @@
 using DAFA.Application.Validation;
 using DAFA.Application.ViewModels;
 using DAFA.Domain.Interfaces.Services;
+using DAFA.Infra.CrossCutting.Identity.Configuration;
 using DAFA.Infra.Data.Context;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace DAFA.Application.AppServices
 {
     public class EventAppService : BaseAppService<DAFAContext>, IEventAppService
     {
+        private const string DATE_FORMAT = "dd/MM/yyyy";
         private readonly IEventService eventService;
 
         public EventAppService(IEventService eventService)
@@ -70,6 +75,31 @@ namespace DAFA.Application.AppServices
                 Commit();
 
             return FromDomainToApplicationResult(result);
+        }
+
+        public void SendEventWarnings()
+        {
+            var overdueEvents = eventService.GetOverdueEvents();
+
+            if (!overdueEvents.Any())
+                return;
+
+            var builder = new StringBuilder();
+            foreach (var e in overdueEvents)
+            {
+                var line = $"Jazida '{e.Field.Name}'. O evento '{e.Name}' vence no dia {e.Date.ToString(DATE_FORMAT)}";
+                builder.Append(line).Append("<br/>");
+            }
+
+            using (var emailService = new EmailService())
+            {
+                emailService.SendAsync(new IdentityMessage
+                {
+                    Destination = "mvfavila@gmail.com",
+                    Subject = $"DAFA - Alertas {DateTime.Today.ToString(DATE_FORMAT)}",
+                    Body = builder.ToString()
+                });
+            }
         }
     }
 }

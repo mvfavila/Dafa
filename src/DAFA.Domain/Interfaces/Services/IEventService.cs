@@ -15,5 +15,7 @@ namespace DAFA.Domain.Interfaces.Services
         new ValidationResult Add(Event eventObj);
 
         new ValidationResult Update(Event eventObj);
+
+        IEnumerable<Event> GetOverdueEvents();
     }
 }
