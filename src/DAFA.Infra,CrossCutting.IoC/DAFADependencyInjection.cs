@@ -29,6 +29,8 @@ namespace DAFA.Infra.CrossCutting.IoC
 
             container.Register<IEventRepository, EventRepository>(Lifestyle.Scoped);
             container.Register<IEventReadOnlyRepository, EventReadOnlyRepository>(Lifestyle.Scoped);
+            container.Register<IEventWarningRepository, EventWarningRepository>(Lifestyle.Scoped);
+            container.Register<IEventWarningReadOnlyRepository, EventWarningReadOnlyRepository>(Lifestyle.Scoped);
             container.Register<IEventTypeRepository, EventTypeRepository>(Lifestyle.Scoped);
             container.Register<IEventTypeReadOnlyRepository, EventTypeReadOnlyRepository>(Lifestyle.Scoped);
             container.Register<IPeriodicityRepository, PeriodicityRepository>(Lifestyle.Scoped);
@@ -60,6 +62,7 @@ namespace DAFA.Infra.CrossCutting.IoC
             // Domain
 
             container.Register<IEventService, EventService>(Lifestyle.Scoped);
+            container.Register<IEventWarningService, EventWarningService>(Lifestyle.Scoped);
             container.Register<IEventTypeService, EventTypeService>(Lifestyle.Scoped);
             container.Register<IPeriodicityService, PeriodicityService>(Lifestyle.Scoped);
             container.Register<IClientService, ClientService>(Lifestyle.Scoped);
@@ -69,6 +72,7 @@ namespace DAFA.Infra.CrossCutting.IoC
             // Application
 
             container.Register<IEventAppService, EventAppService>(Lifestyle.Scoped);
+            container.Register<IEventWarningAppService, EventWarningAppService>(Lifestyle.Scoped);
             container.Register<IEventTypeAppService, EventTypeAppService>(Lifestyle.Scoped);
             container.Register<IPeriodicityAppService, PeriodicityAppService>(Lifestyle.Scoped);
             container.Register<IClientAppService, ClientAppService>(Lifestyle.Scoped);
