@@ -89,7 +89,7 @@ namespace DAFA.Presentation.UI.MVC
 
 		private void TimerTask(object StateObj)
 		{
-            eventAppService.SendEventWarnings();
+            eventAppService.ProcessEventWarnings();
 		}
 	}
 }

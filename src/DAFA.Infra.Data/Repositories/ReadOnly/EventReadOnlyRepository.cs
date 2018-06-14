@@ -43,13 +43,19 @@ namespace DAFA.Infra.Data.Repositories.ReadOnly
         public IEnumerable<Event> GetOverdueEvents()
         {
             const string sql = @"SELECT
-                                    e.*,
-	                                field.FieldId as 'Id',
-	                                field.*
-                                FROM Event e
-                                INNER JOIN Field field ON e.FieldId = field.FieldId
-                                INNER JOIN EventType eventType ON eventType.EventTypeId = e.EventTypeId
-                                WHERE DATEDIFF(day, GETDATE(), e.Date) <= eventType.NumberOfDaysToWarning";
+                                     e.*,
+	                                 field.FieldId as 'Id',
+	                                 field.*
+                                 FROM Event e
+                                 INNER JOIN Field field ON e.FieldId = field.FieldId
+                                 INNER JOIN EventType eventType ON eventType.EventTypeId = e.EventTypeId
+                                 WHERE DATEDIFF(day, GETDATE(), e.Date) <= eventType.NumberOfDaysToWarning
+	                                 AND NOT EXISTS
+		                                 (
+			                                 SELECT 1
+			                                 FROM EventWarning ew
+			                                 WHERE ew.EventId = e.EventId
+		                                 )";
 
             using (var connection = Connection)
             {

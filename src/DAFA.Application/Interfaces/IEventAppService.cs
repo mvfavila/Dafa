@@ -20,6 +20,6 @@ namespace DAFA.Application.Interfaces
 
         void Remove(Guid id);
 
-        void SendEventWarnings();
+        void ProcessEventWarnings();
     }
 }

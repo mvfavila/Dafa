@@ -1,6 +1,7 @@
 ﻿using DAFA.Application.Interfaces;
 using DAFA.Application.Validation;
 using DAFA.Application.ViewModels;
+using DAFA.Domain.Entities;
 using DAFA.Domain.Interfaces.Services;
 using DAFA.Infra.CrossCutting.Identity.Configuration;
 using DAFA.Infra.Data.Context;
@@ -16,10 +17,12 @@ namespace DAFA.Application.AppServices
     {
         private const string DATE_FORMAT = "dd/MM/yyyy";
         private readonly IEventService eventService;
+        private readonly IEventWarningService eventWarningService;
 
-        public EventAppService(IEventService eventService)
+        public EventAppService(IEventService eventService, IEventWarningService eventWarningService)
         {
             this.eventService = eventService;
+            this.eventWarningService = eventWarningService;
         }
 
         public ValidationAppResult Add(EventViewModel eventViewModel)
@@ -77,17 +80,20 @@ namespace DAFA.Application.AppServices
             return FromDomainToApplicationResult(result);
         }
 
-        public void SendEventWarnings()
+        public void ProcessEventWarnings()
         {
             var overdueEvents = eventService.GetOverdueEvents();
 
-            if (!overdueEvents.Any())
-                return;
+            if (overdueEvents.Any())
+                AddEventWarnings(overdueEvents);
+
+            var eventWarnings = eventWarningService.GetUnsolved();
 
             var builder = new StringBuilder();
-            foreach (var e in overdueEvents)
+            foreach (var ew in eventWarnings)
             {
-                var line = $"Jazida '{e.Field.Name}'. O evento '{e.Name}' vence no dia {e.Date.ToString(DATE_FORMAT)}";
+                var line = $@"Jazida '{ew.Event.Field.Name}'.
+                    O evento '{ew.Event.Name}' vence no dia {ew.Date.ToString(DATE_FORMAT)}";
                 builder.Append(line).Append("<br/>");
             }
 
@@ -100,6 +106,18 @@ namespace DAFA.Application.AppServices
                     Body = builder.ToString()
                 });
             }
+        }
+
+        private void AddEventWarnings(IEnumerable<Event> overdueEvents)
+        {
+            BeginTransaction();
+
+            foreach (var e in overdueEvents)
+            {
+                eventWarningService.Add(EventWarning.CreateFromEvent(e));
+            }
+
+            Commit();
         }
     }
 }

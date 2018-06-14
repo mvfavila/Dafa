@@ -8,6 +8,13 @@ namespace DAFA.Domain.Entities
     /// </summary>
     public class EventWarning
     {
+        private EventWarning()
+        {
+            EventWarningId = Guid.NewGuid();
+            Date = DateTime.Now;
+            Solved = false;
+        }
+
         public Guid EventWarningId { get; private set; }
 
         public DateTime Date { get; private set; }
@@ -21,6 +28,15 @@ namespace DAFA.Domain.Entities
         public void SetEvent(Event e)
         {
             Event = e;
+        }
+
+        public static EventWarning CreateFromEvent(Event e)
+        {
+            return new EventWarning
+            {
+                EventId = e.EventId,
+                Event = e
+            };
         }
     }
 }
