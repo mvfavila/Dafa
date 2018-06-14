@@ -1,5 +1,6 @@
 ﻿using DAFA.Application.Interfaces;
 using DAFA.Application.ViewModels;
+using DAFA.Domain.Entities;
 using DAFA.Domain.Interfaces.Services;
 using DAFA.Infra.Data.Context;
 using System;
@@ -14,6 +15,14 @@ namespace DAFA.Application.AppServices
         public EventWarningAppService(IEventWarningService eventWarningService)
         {
             this.eventWarningService = eventWarningService;
+        }
+
+        public void Add(EventWarningViewModel eventWarningViewModel)
+        {
+            var model = EventWarning.FactoryAdd(eventWarningViewModel.EventId,
+                Mapping.EventMapper.FromViewModelToDomain(eventWarningViewModel.Event));
+
+            eventWarningService.Add(model);
         }
 
         public IEnumerable<EventWarningViewModel> GetUnsolved()

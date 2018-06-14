@@ -5,7 +5,6 @@ namespace DAFA.Application.ViewModels
 {
     public class EventWarningViewModel
     {
-
         [ScaffoldColumn(false)]
         public Guid EventWarningId { get; set; }
 
@@ -20,5 +19,10 @@ namespace DAFA.Application.ViewModels
         public Guid EventId { get; set; }
 
         public EventViewModel Event { get; set; }
+
+        [ScaffoldColumn(false)]
+        public Guid FieldId { get; set; }
+
+        public FieldViewModel Field { get; set; }
     }
 }

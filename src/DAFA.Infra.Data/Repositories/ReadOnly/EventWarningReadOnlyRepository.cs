@@ -13,24 +13,29 @@ namespace DAFA.Infra.Data.Repositories.ReadOnly
         public IEnumerable<EventWarning> GetUnsolved()
         {
             const string sql = @"SELECT
-                                    ew.*,
-	                                e.EventId as 'Id',
-	                                e.*
-                                FROM EventWarning ew
-                                INNER JOIN Event e ON ew.EventId = e.EventId
-                                WHERE ew.Solved = 'False'";
+                                     ew.*,
+	                                 e.EventId as 'Id',
+	                                 e.*,
+	                                 e.FieldId as 'Id2',
+	                                 f.*
+                                 FROM EventWarning ew
+                                 INNER JOIN Event e ON ew.EventId = e.EventId
+                                 INNER JOIN Field f ON e.FieldId = f.FieldId
+                                 WHERE ew.Solved = 'False'";
 
             using (var connection = Connection)
             {
                 connection.Open();
 
-                var events = connection.Query<EventWarning, Event, EventWarning>(
+                var events = connection.Query<EventWarning, Event, Field, EventWarning>(
                         sql,
-                        (ew, e) =>
+                        (ew, e, f) =>
                         {
+                            e.SetField(f);
                             ew.SetEvent(e);
                             return ew;
-                        });
+                        },
+                        splitOn: "Id, Id2");
 
                 return events;
             }

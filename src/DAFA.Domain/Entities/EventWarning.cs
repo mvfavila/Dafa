@@ -38,5 +38,27 @@ namespace DAFA.Domain.Entities
                 Event = e
             };
         }
+
+        public static EventWarning FactoryAdd(Guid eventId, Event e)
+        {
+            return new EventWarning
+            {
+                EventId = eventId,
+                Event = Event.FactoryMap(e.EventId, e.Name, e.Description, e.Date, e.FieldId, e.EventTypeId)
+            };
+        }
+
+        public static EventWarning FactoryMap(Guid eventWarningId, DateTime date, bool solved, Guid eventId,
+            Event e)
+        {
+            return new EventWarning
+            {
+                EventWarningId = eventWarningId,
+                Date = date,
+                Solved = solved,
+                EventId = eventId,
+                Event = Event.FactoryMap(e.EventId, e.Name, e.Description, e.Date, e.FieldId, e.EventTypeId)
+            };
+        }
     }
 }

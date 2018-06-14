@@ -1,4 +1,4 @@
-﻿using DAFA.Application.Interfaces;
+﻿using DAFA.Presentation.UI.MVC.Controllers;
 using System;
 using System.Configuration;
 using System.Threading;
@@ -11,12 +11,12 @@ namespace DAFA.Presentation.UI.MVC
         private readonly static string HOURS_BETWEEN_CHECKS = ConfigurationManager.AppSettings["HOURS_BETWEEN_CHECKS"];
 		private readonly static string EVENT_CHECK_TIME = ConfigurationManager.AppSettings["EVENT_CHECK_TIME"];
 
-        private readonly IEventAppService eventAppService;
-		private Thread _thread;
+        private readonly EventWarningController eventWarningController;
+        private Thread _thread;
 
 		public StartupTimer()
 		{
-            eventAppService = DependencyResolver.Current.GetService<IEventAppService>();
+            this.eventWarningController = DependencyResolver.Current.GetService<EventWarningController>();
         }
 
 		public void StartEventWarningWatcher()
@@ -46,7 +46,7 @@ namespace DAFA.Presentation.UI.MVC
             // Create a timer that calls a procedure every 2 seconds.
             // Note: There is no Start method; the timer starts running as soon as
             // the instance is created.
-            var TimerItem = new Timer(TimerDelegate, StateObj, FIRST_DELAY, TIME_BETWEEN_CHECKS);
+            var TimerItem = new Timer(TimerDelegate, StateObj, 10000, 2000000);// FIRST_DELAY, TIME_BETWEEN_CHECKS);
 
 			// Save a reference for Dispose.
 			StateObj.TimerReference = TimerItem;
@@ -89,7 +89,7 @@ namespace DAFA.Presentation.UI.MVC
 
 		private void TimerTask(object StateObj)
 		{
-            eventAppService.ProcessEventWarnings();
-		}
-	}
+            eventWarningController.ProcessEventWarnings();
+        }
+    }
 }

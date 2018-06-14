@@ -1,21 +1,15 @@
 ﻿using DAFA.Application.Interfaces;
 using DAFA.Application.Validation;
 using DAFA.Application.ViewModels;
-using DAFA.Domain.Entities;
 using DAFA.Domain.Interfaces.Services;
-using DAFA.Infra.CrossCutting.Identity.Configuration;
 using DAFA.Infra.Data.Context;
-using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace DAFA.Application.AppServices
 {
     public class EventAppService : BaseAppService<DAFAContext>, IEventAppService
     {
-        private const string DATE_FORMAT = "dd/MM/yyyy";
         private readonly IEventService eventService;
         private readonly IEventWarningService eventWarningService;
 
@@ -80,44 +74,11 @@ namespace DAFA.Application.AppServices
             return FromDomainToApplicationResult(result);
         }
 
-        public void ProcessEventWarnings()
+        public IEnumerable<EventViewModel> ProcessEventWarnings()
         {
             var overdueEvents = eventService.GetOverdueEvents();
 
-            if (overdueEvents.Any())
-                AddEventWarnings(overdueEvents);
-
-            var eventWarnings = eventWarningService.GetUnsolved();
-
-            var builder = new StringBuilder();
-            foreach (var ew in eventWarnings)
-            {
-                var line = $@"Jazida '{ew.Event.Field.Name}'.
-                    O evento '{ew.Event.Name}' vence no dia {ew.Date.ToString(DATE_FORMAT)}";
-                builder.Append(line).Append("<br/>");
-            }
-
-            using (var emailService = new EmailService())
-            {
-                emailService.SendAsync(new IdentityMessage
-                {
-                    Destination = "mvfavila@gmail.com",
-                    Subject = $"DAFA - Alertas {DateTime.Today.ToString(DATE_FORMAT)}",
-                    Body = builder.ToString()
-                });
-            }
-        }
-
-        private void AddEventWarnings(IEnumerable<Event> overdueEvents)
-        {
-            BeginTransaction();
-
-            foreach (var e in overdueEvents)
-            {
-                eventWarningService.Add(EventWarning.CreateFromEvent(e));
-            }
-
-            Commit();
+            return Mapping.EventMapper.FromDomainToViewModel(overdueEvents);
         }
     }
 }

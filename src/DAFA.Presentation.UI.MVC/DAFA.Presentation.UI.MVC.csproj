@@ -207,6 +207,7 @@
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\EventTypeController.cs" />
+    <Compile Include="Controllers\EventWarningController.cs" />
     <Compile Include="Controllers\FieldController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -421,6 +422,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\EventWarning\" />
     <Folder Include="Views\Navigation\" />
     <Folder Include="Views\RolesAdmin\" />
   </ItemGroup>

@@ -14,12 +14,12 @@ namespace DAFA.Application.Interfaces
 
         EventViewModel GetById(Guid id);
 
-        ValidationAppResult Add(EventViewModel eventTypeViewModel);
+        ValidationAppResult Add(EventViewModel eventViewModel);
 
-        ValidationAppResult Update(EventViewModel eventTypeViewModel);
+        ValidationAppResult Update(EventViewModel eventViewModel);
 
         void Remove(Guid id);
 
-        void ProcessEventWarnings();
+        IEnumerable<EventViewModel> ProcessEventWarnings();
     }
 }
