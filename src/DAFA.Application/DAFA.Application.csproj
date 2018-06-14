@@ -50,6 +50,7 @@
     <Compile Include="AppServices\ClientAppService.cs" />
     <Compile Include="AppServices\EventAppService.cs" />
     <Compile Include="AppServices\EventTypeAppService.cs" />
+    <Compile Include="AppServices\EventWarningAppService.cs" />
     <Compile Include="AppServices\FieldAppService.cs" />
     <Compile Include="AppServices\MenuAppService.cs" />
     <Compile Include="AppServices\PeriodicityAppService.cs" />
@@ -57,12 +58,14 @@
     <Compile Include="Interfaces\IClientAppService.cs" />
     <Compile Include="Interfaces\IEventAppService.cs" />
     <Compile Include="Interfaces\IEventTypeAppService.cs" />
+    <Compile Include="Interfaces\IEventWarningAppService.cs" />
     <Compile Include="Interfaces\IFieldAppService.cs" />
     <Compile Include="Interfaces\IMenuAppService.cs" />
     <Compile Include="Interfaces\IPeriodicityAppService.cs" />
     <Compile Include="Mapping\ClientMapper.cs" />
     <Compile Include="Mapping\EventMapper.cs" />
     <Compile Include="Mapping\EventTypeMapper.cs" />
+    <Compile Include="Mapping\EventWarningMapper.cs" />
     <Compile Include="Mapping\FieldMapper.cs" />
     <Compile Include="Mapping\MenuMapper.cs" />
     <Compile Include="Mapping\PeriodicityMapper.cs" />
@@ -73,6 +76,7 @@
     <Compile Include="ViewModels\ClientViewModel.cs" />
     <Compile Include="ViewModels\EventTypeViewModel.cs" />
     <Compile Include="ViewModels\EventViewModel.cs" />
+    <Compile Include="ViewModels\EventWarningViewModel.cs" />
     <Compile Include="ViewModels\FieldViewModel.cs" />
     <Compile Include="ViewModels\MenuItemViewModel.cs" />
     <Compile Include="ViewModels\PeriodicityViewModel.cs" />
