@@ -1,4 +1,4 @@
-﻿using DAFA.Presentation.UI.MVC.Controllers;
+﻿using DAFA.Application.Interfaces;
 using System;
 using System.Configuration;
 using System.Threading;
@@ -11,12 +11,12 @@ namespace DAFA.Presentation.UI.MVC
         private readonly static string HOURS_BETWEEN_CHECKS = ConfigurationManager.AppSettings["HOURS_BETWEEN_CHECKS"];
 		private readonly static string EVENT_CHECK_TIME = ConfigurationManager.AppSettings["EVENT_CHECK_TIME"];
 
-        private readonly EventWarningController eventWarningController;
+        private readonly IWarningsProcessingAppService warningsProcessingAppService;
         private Thread _thread;
 
 		public StartupTimer()
 		{
-            this.eventWarningController = DependencyResolver.Current.GetService<EventWarningController>();
+            warningsProcessingAppService = DependencyResolver.Current.GetService<IWarningsProcessingAppService>();
         }
 
 		public void StartEventWarningWatcher()
@@ -89,7 +89,7 @@ namespace DAFA.Presentation.UI.MVC
 
 		private void TimerTask(object StateObj)
 		{
-            eventWarningController.ProcessEventWarnings();
+            warningsProcessingAppService.ProcessWarnings();
         }
     }
 }
