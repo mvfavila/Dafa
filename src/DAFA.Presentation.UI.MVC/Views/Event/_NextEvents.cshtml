@@ -30,7 +30,7 @@
                     @Html.DisplayFor(modelItem => item.Event.Date)
                 </td>
                 <td>
-                    @Html.ActionLink("Solve", "Solve", "EventWarning", new { id=item.EventWarningId }, null)
+                    <input type="button" class="btn btn-default" value="Resolvido" onclick="location.href='@Url.Action("Solve", "EventWarning", new { id = item.EventWarningId })'" />
                 </td>
             </tr>
         }
