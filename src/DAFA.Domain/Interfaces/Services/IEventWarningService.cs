@@ -11,6 +11,8 @@ namespace DAFA.Domain.Interfaces.Services
 
         IEnumerable<EventWarning> GetUnsolvedByClient(Guid id);
 
+        new EventWarning GetById(Guid id);
+
         new ValidationResult Update(EventWarning eventWarning);
     }
 }

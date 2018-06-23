@@ -75,7 +75,8 @@ namespace DAFA.Domain.Entities
                 SolvedDate = solvedDate,
                 Solved = solved,
                 EventId = eventId,
-                Event = Event.FactoryMap(e.EventId, e.Name, e.Description, e.Date, e.FieldId, e.EventTypeId)
+                Event = e != null
+                    ? Event.FactoryMap(e.EventId, e.Name, e.Description, e.Date, e.FieldId, e.EventTypeId) : null
             };
         }
     }

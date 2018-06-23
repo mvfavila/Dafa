@@ -12,10 +12,12 @@ namespace DAFA.Application.AppServices
     public class EventWarningAppService : BaseAppService<DAFAContext>, IEventWarningAppService
     {
         private readonly IEventWarningService eventWarningService;
+        private readonly IEventService eventService;
 
-        public EventWarningAppService(IEventWarningService eventWarningService)
+        public EventWarningAppService(IEventWarningService eventWarningService, IEventService eventService)
         {
             this.eventWarningService = eventWarningService;
+            this.eventService = eventService;
         }
 
         public void Add(EventWarningViewModel eventWarningViewModel)
@@ -30,14 +32,18 @@ namespace DAFA.Application.AppServices
         {
             var eventWarnings = eventWarningService.GetUnsolved();
 
-            return Mapping.EventWarningMapper.FromDomainToViewModel(eventWarnings);
+            var viewModels = Mapping.EventWarningMapper.FromDomainToViewModel(eventWarnings);
+
+            return FillViewModels(viewModels);
         }
 
         public IEnumerable<EventWarningViewModel> GetUnsolvedByClient(Guid id)
         {
             var eventWarnings = eventWarningService.GetUnsolvedByClient(id);
 
-            return Mapping.EventWarningMapper.FromDomainToViewModel(eventWarnings);
+            var viewModels = Mapping.EventWarningMapper.FromDomainToViewModel(eventWarnings);
+
+            return FillViewModels(viewModels);
         }
 
         public void Dispose()
@@ -50,7 +56,9 @@ namespace DAFA.Application.AppServices
         {
             var eventWarning = eventWarningService.GetById(id);
 
-            return Mapping.EventWarningMapper.FromDomainToViewModel(eventWarning);
+            var eventWarningViewModel = Mapping.EventWarningMapper.FromDomainToViewModel(eventWarning);
+
+            return FillViewModels(eventWarningViewModel);
         }
 
         public ValidationAppResult Update(EventWarningViewModel eventWarningViewModel)
@@ -64,6 +72,23 @@ namespace DAFA.Application.AppServices
             Commit();
 
             return FromDomainToApplicationResult(result);
+        }
+
+        private IEnumerable<EventWarningViewModel> FillViewModels(IEnumerable<EventWarningViewModel> viewModels)
+        {
+            var newList = new List<EventWarningViewModel>();
+            foreach (var viewModel in viewModels)
+            {
+                newList.Add(FillViewModels(viewModel));
+            }
+            return newList;
+        }
+
+        private EventWarningViewModel FillViewModels(EventWarningViewModel viewModel)
+        {
+            var eventObj = eventService.GetById(viewModel.EventId);
+            viewModel.Event = Mapping.EventMapper.FromDomainToViewModel(eventObj);
+            return viewModel;
         }
     }
 }

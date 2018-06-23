@@ -10,17 +10,12 @@ namespace DAFA.Application.Mapping
 
         internal static EventWarningViewModel FromDomainToViewModel(EventWarning eventWarning)
         {
-            var field = FieldMapper.FromDomainToViewModel(eventWarning.Event.Field);
-
             return new EventWarningViewModel
             {
                 EventWarningId = eventWarning.EventWarningId,
                 Date = eventWarning.Date,
                 Solved = eventWarning.Solved,
-                EventId = eventWarning.EventId,
-                Event = EventMapper.FromDomainToViewModel(eventWarning.Event),
-                FieldId = field.FieldId,
-                Field = field
+                EventId = eventWarning.EventId
             };
         }
 

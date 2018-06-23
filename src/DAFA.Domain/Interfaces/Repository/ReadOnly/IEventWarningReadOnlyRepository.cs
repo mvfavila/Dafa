@@ -9,5 +9,7 @@ namespace DAFA.Domain.Interfaces.Repository.ReadOnly
         IEnumerable<EventWarning> GetUnsolved();
 
         IEnumerable<EventWarning> GetUnsolvedByClient(Guid id);
+
+        new EventWarning GetById(Guid id);
     }
 }

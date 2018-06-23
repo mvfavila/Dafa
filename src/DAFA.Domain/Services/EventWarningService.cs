@@ -33,6 +33,11 @@ namespace DAFA.Domain.Services
             return eventWarningReadOnlyRepository.GetUnsolvedByClient(id);
         }
 
+        public new EventWarning GetById(Guid id)
+        {
+            return eventWarningReadOnlyRepository.GetById(id);
+        }
+
         public new ValidationResult Update(EventWarning eventWarning)
         {
             var validationResult = new ValidationResult();
