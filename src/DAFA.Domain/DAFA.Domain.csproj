@@ -84,9 +84,14 @@
     <Compile Include="Specification\Client\ClientIsNameValidLength.cs" />
     <Compile Include="Specification\Client\ClientIsPhoneNotNullAndNotEmpty.cs" />
     <Compile Include="Specification\Client\ClientIsPhoneValidLength.cs" />
+    <Compile Include="Specification\EventWarning\EventWarningIsEventValid.cs" />
+    <Compile Include="Specification\EventWarning\EventWarningIsSolvedDateValid.cs" />
+    <Compile Include="Specification\EventWarning\EventWarningIsValidSolvedState.cs" />
+    <Compile Include="Specification\EventWarning\EventWarningtIsKeyNotNull.cs" />
     <Compile Include="Validation\Base\BaseSupervisor.cs" />
     <Compile Include="Validation\Client\ClientIsVerifiedForRegistration.cs" />
     <Compile Include="Validation\EventType\EventTypeIsVerifiedForRegistration.cs" />
+    <Compile Include="Validation\EventWarning\EventWarningIsVerifiedForRegistration.cs" />
     <Compile Include="Validation\Event\EventIsVerifiedForRegistration.cs" />
     <Compile Include="Validation\Field\FieldIsVerifiedForRegistration.cs" />
     <Compile Include="Validation\Periodicity\PeriodicityIsVerifiedForRegistration.cs" />

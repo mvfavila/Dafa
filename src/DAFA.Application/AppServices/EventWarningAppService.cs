@@ -1,4 +1,5 @@
 ﻿using DAFA.Application.Interfaces;
+using DAFA.Application.Validation;
 using DAFA.Application.ViewModels;
 using DAFA.Domain.Entities;
 using DAFA.Domain.Interfaces.Services;
@@ -43,6 +44,26 @@ namespace DAFA.Application.AppServices
         {
             eventWarningService.Dispose();
             GC.SuppressFinalize(this);
+        }
+
+        public EventWarningViewModel GetById(Guid id)
+        {
+            var eventWarning = eventWarningService.GetById(id);
+
+            return Mapping.EventWarningMapper.FromDomainToViewModel(eventWarning);
+        }
+
+        public ValidationAppResult Update(EventWarningViewModel eventWarningViewModel)
+        {
+            var model = EventWarning.FactoryMap(eventWarningViewModel.EventWarningId, eventWarningViewModel.Date,
+                eventWarningViewModel.SolvedDate, eventWarningViewModel.Solved, eventWarningViewModel.EventId,
+                null);
+
+            var result = eventWarningService.Update(model);
+
+            Commit();
+
+            return FromDomainToApplicationResult(result);
         }
     }
 }

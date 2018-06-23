@@ -35,6 +35,7 @@ namespace DAFA.Infra.CrossCutting.Identity.Migrations
             var claimEditField = Claims.FactorySeed("680805a0-e514-4da3-9904-16e542729b4b", "EditField");
             var claimDeactivateField = Claims.FactorySeed("6e32101e-0d76-437a-aeff-af3fa005ac2b", "DeactivateField");
             var claimManageField = Claims.FactorySeed("7408c9c3-b6f9-4724-84f8-e5c43c51e2a0", "ManageField");
+            var claimSolveEventWarning = Claims.FactorySeed("24c3ff6d-d646-4a73-a875-c2fe98dd2119", "SolveEventWarning");
 
             context.Claims.AddOrUpdate(
                 claimViewClient,
@@ -57,7 +58,8 @@ namespace DAFA.Infra.CrossCutting.Identity.Migrations
                 claimCreateField,
                 claimEditField,
                 claimDeactivateField,
-                claimManageField);
+                claimManageField,
+                claimSolveEventWarning);
 
             // TODO: remove user addition after development
             var userAdmin = ApplicationUser.FactorySeed("f9babd79-00ca-4b97-83c7-b908f39d5585", "Admin", "Doe", "admin@email.com", @"ACcx4YaAQgp5LxJ75JphPcH6/LcXb/1WlPDWS/OXfIFSxs0tV1Fu9gDKgPnsSU/c8Q==", "b64a9f55-cb3f-4358-b1a9-058ab5676a20");
@@ -82,7 +84,7 @@ namespace DAFA.Infra.CrossCutting.Identity.Migrations
             userAdmin.Claims.Add(ConvertClaim(19, claimCreateClient, userAdmin, "True"));
             userAdmin.Claims.Add(ConvertClaim(20, claimEditClient, userAdmin, "True"));
             userAdmin.Claims.Add(ConvertClaim(21, claimDeactivateClient, userAdmin, "True"));
-
+            userAdmin.Claims.Add(ConvertClaim(24, claimSolveEventWarning, userAdmin, "True"));
 
             context.Users.AddOrUpdate(
                 userAdmin

@@ -40,6 +40,7 @@ namespace DAFA.Application.Mapping
             return EventWarning.FactoryMap(
                 eventWarningViewModel.EventWarningId,
                 eventWarningViewModel.Date,
+                eventWarningViewModel.SolvedDate,
                 eventWarningViewModel.Solved,
                 eventWarningViewModel.EventId,
                 EventMapper.FromViewModelToDomain(eventWarningViewModel.Event)

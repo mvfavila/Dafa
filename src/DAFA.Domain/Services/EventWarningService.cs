@@ -4,6 +4,8 @@ using DAFA.Domain.Entities;
 using DAFA.Domain.Interfaces.Repository;
 using DAFA.Domain.Interfaces.Repository.ReadOnly;
 using DAFA.Domain.Interfaces.Services;
+using DAFA.Domain.Validation.EventWarning;
+using DAFA.Domain.ValueObjects;
 
 namespace DAFA.Domain.Services
 {
@@ -29,6 +31,29 @@ namespace DAFA.Domain.Services
         public IEnumerable<EventWarning> GetUnsolvedByClient(Guid id)
         {
             return eventWarningReadOnlyRepository.GetUnsolvedByClient(id);
+        }
+
+        public new ValidationResult Update(EventWarning eventWarning)
+        {
+            var validationResult = new ValidationResult();
+
+            if (!eventWarning.IsValid())
+            {
+                validationResult.AddError(eventWarning.ValidationResult);
+                return validationResult;
+            }
+
+            var validator = new EventWarningIsVerifiedForRegistration();
+            var validationService = validator.Validate(eventWarning);
+            if (!validationService.IsValid)
+            {
+                validationResult.AddError(eventWarning.ValidationResult);
+                return validationResult;
+            }
+
+            eventWarningRepository.Update(eventWarning);
+
+            return validationResult;
         }
     }
 }

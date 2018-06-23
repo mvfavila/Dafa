@@ -13,6 +13,12 @@ namespace DAFA.Application.ViewModels
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
+        [ScaffoldColumn(false)]
+        [Display(Name = "Data da solução")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? SolvedDate { get; set; }
+
         public bool Solved { get; set; }
 
         [ScaffoldColumn(false)]

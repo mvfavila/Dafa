@@ -14,6 +14,9 @@ namespace DAFA.Infra.Data.EntityConfig
             Property(e => e.Date)
                 .IsRequired();
 
+            Property(e => e.SolvedDate)
+                .IsOptional();
+
             Property(e => e.EventId)
                 .IsRequired();
 
