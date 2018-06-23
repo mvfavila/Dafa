@@ -54,7 +54,6 @@
     <Compile Include="AppServices\FieldAppService.cs" />
     <Compile Include="AppServices\MenuAppService.cs" />
     <Compile Include="AppServices\PeriodicityAppService.cs" />
-    <Compile Include="AppServices\WarningsProcessingAppService.cs" />
     <Compile Include="Interfaces\IBaseAppService.cs" />
     <Compile Include="Interfaces\IClientAppService.cs" />
     <Compile Include="Interfaces\IEventAppService.cs" />
@@ -63,7 +62,6 @@
     <Compile Include="Interfaces\IFieldAppService.cs" />
     <Compile Include="Interfaces\IMenuAppService.cs" />
     <Compile Include="Interfaces\IPeriodicityAppService.cs" />
-    <Compile Include="Interfaces\IWarningsProcessingAppService.cs" />
     <Compile Include="Mapping\ClientMapper.cs" />
     <Compile Include="Mapping\EventMapper.cs" />
     <Compile Include="Mapping\EventTypeMapper.cs" />

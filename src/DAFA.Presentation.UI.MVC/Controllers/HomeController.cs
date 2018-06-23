@@ -1,39 +1,12 @@
-﻿using DAFA.Application.Interfaces;
-using DAFA.Application.ViewModels;
-using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace DAFA.Presentation.UI.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private static StartupTimer timer;
-        private readonly IEventWarningAppService eventWarningAppService;
-
-        public HomeController(IEventWarningAppService eventWarningAppService)
-        {
-            this.eventWarningAppService = eventWarningAppService;
-        }
-
         public ActionResult Index()
         {
-            if(timer == null)
-            {
-                timer = new StartupTimer();
-                timer.StartEventWarningWatcher();
-            }
-
-            var loggedId = User.Identity.GetUserId();
-
-            if (loggedId == null || !Guid.TryParse(loggedId, out Guid userId))
-            {
-                return View(new List<EventWarningViewModel>());
-            }
-
-            var eventWarnings = eventWarningAppService.GetUnsolved();
-            return View(eventWarnings);
+            return View();
         }
 
         public ActionResult About()

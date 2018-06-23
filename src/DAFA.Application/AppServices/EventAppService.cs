@@ -73,12 +73,5 @@ namespace DAFA.Application.AppServices
 
             return FromDomainToApplicationResult(result);
         }
-
-        public IEnumerable<EventViewModel> ProcessEventWarnings()
-        {
-            var overdueEvents = eventService.GetOverdueEvents();
-
-            return Mapping.EventMapper.FromDomainToViewModel(overdueEvents);
-        }
     }
 }

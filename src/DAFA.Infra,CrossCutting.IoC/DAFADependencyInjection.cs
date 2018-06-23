@@ -78,7 +78,6 @@ namespace DAFA.Infra.CrossCutting.IoC
             container.Register<IClientAppService, ClientAppService>(Lifestyle.Scoped);
             container.Register<IFieldAppService, FieldAppService>(Lifestyle.Scoped);
             container.Register<IMenuAppService, MenuAppService>(Lifestyle.Scoped);
-            container.Register<IWarningsProcessingAppService, WarningsProcessingAppService>(Lifestyle.Scoped);
         }
     }
 }

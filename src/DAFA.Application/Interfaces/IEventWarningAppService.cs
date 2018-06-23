@@ -6,8 +6,6 @@ namespace DAFA.Application.Interfaces
 {
     public interface IEventWarningAppService : IDisposable
     {
-        void Add(EventWarningViewModel eventWarningViewModel);
-
         IEnumerable<EventWarningViewModel> GetUnsolved();
 
         IEnumerable<EventWarningViewModel> GetUnsolvedByClient(Guid id);
