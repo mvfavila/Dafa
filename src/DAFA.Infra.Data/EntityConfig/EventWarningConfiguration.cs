@@ -23,6 +23,8 @@ namespace DAFA.Infra.Data.EntityConfig
             HasRequired(ew => ew.Event)
                 .WithMany(e => e.EventWarnings)
                 .HasForeignKey(ew => ew.EventId);
+
+            Ignore(p => p.ValidationResult);
         }
     }
 }

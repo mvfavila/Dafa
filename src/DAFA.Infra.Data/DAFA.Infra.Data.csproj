@@ -93,6 +93,14 @@
     <Compile Include="Migrations\201806141145571_20180614 - EventWarning added.Designer.cs">
       <DependentUpon>201806141145571_20180614 - EventWarning added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806231715568_20180623 - Solved Date added to Event Warning table.cs" />
+    <Compile Include="Migrations\201806231715568_20180623 - Solved Date added to Event Warning table.Designer.cs">
+      <DependentUpon>201806231715568_20180623 - Solved Date added to Event Warning table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806231719165_20180623 - ValidationMessage should be ignored at EventWarning table.cs" />
+    <Compile Include="Migrations\201806231719165_20180623 - ValidationMessage should be ignored at EventWarning table.Designer.cs">
+      <DependentUpon>201806231719165_20180623 - ValidationMessage should be ignored at EventWarning table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
@@ -136,6 +144,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806141145571_20180614 - EventWarning added.resx">
       <DependentUpon>201806141145571_20180614 - EventWarning added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806231715568_20180623 - Solved Date added to Event Warning table.resx">
+      <DependentUpon>201806231715568_20180623 - Solved Date added to Event Warning table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806231719165_20180623 - ValidationMessage should be ignored at EventWarning table.resx">
+      <DependentUpon>201806231719165_20180623 - ValidationMessage should be ignored at EventWarning table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
