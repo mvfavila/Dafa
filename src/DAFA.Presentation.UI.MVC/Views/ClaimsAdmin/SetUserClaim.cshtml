@@ -2,22 +2,22 @@
 @model DAFA.Presentation.UI.MVC.ViewModels.Claims.ClaimViewModel
 
 @{
-    ViewBag.Title = "Associate Claim";
+    ViewBag.Title = "Associar Permissão";
 }
 
-<h2>Associar Claim</h2>
+<h2>Associar Permissão</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>UserClaim</h4>
+        <h4>Permissão de Usuário</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         
         
-        <h4>Add new Claim to user @ViewBag.User.UserName</h4>
+        <h4>Adicionar permissão para o usuário @ViewBag.User.UserName</h4>
         @{
             ApplicationUser user = ViewBag.User;
         }
@@ -42,12 +42,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Add" class="btn btn-default" />
+                <input type="submit" value="Adicionar" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Go back to list", "Index")
+    @Html.ActionLink("Voltar para a lista", "Index")
 </div>

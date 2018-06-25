@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<DAFA.Application.ViewModels.ClientViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Índice";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Índice</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Adicionar Novo", "Create")
 </p>
 <table class="table">
     <tr>
@@ -42,8 +42,8 @@
             @Html.DisplayFor(modelItem => item.Active)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ClientId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ClientId })
+            @Html.ActionLink("Editar", "Edit", new { id=item.ClientId }) |
+            @Html.ActionLink("Detalhes", "Details", new { id = item.ClientId })
         </td>
     </tr>
 }

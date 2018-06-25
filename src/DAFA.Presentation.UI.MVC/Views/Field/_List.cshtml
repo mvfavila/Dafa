@@ -1,7 +1,7 @@
 ﻿@model DAFA.Application.ViewModels.ClientFieldViewModel
 
 <hr />
-<h4>Jazidas</h4>
+<h4>Jazida</h4>
 <table class="table">
     <tr>
         <th>
@@ -22,8 +22,8 @@
             @Html.CheckBoxFor(modelItem => item.Active, new { @disabled = "disabled" })
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", "Field", new { id=item.FieldId }, null) |
-            @Html.ActionLink("Details", "Details", "Field", new { id = item.FieldId }, null)
+            @Html.ActionLink("Editar", "Edit", "Field", new { id=item.FieldId }, null) |
+            @Html.ActionLink("Detalhes", "Details", "Field", new { id = item.FieldId }, null)
         </td>
     </tr>
 }

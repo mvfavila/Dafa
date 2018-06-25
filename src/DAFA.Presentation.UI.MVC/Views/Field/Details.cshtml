@@ -1,14 +1,14 @@
 ﻿@model DAFA.Application.ViewModels.FieldViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalhes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Detalhes</h2>
 
 <div>
-    <h4>Field</h4>
+    <h4>Jazidas</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -22,7 +22,7 @@
     </dl>
 </div>
 
-<h4>Events</h4>
+<h4>Eventos</h4>
 @if (Model.Events != null && Model.Events.Any())
 {    
     <table class="table">
@@ -63,7 +63,7 @@ else
 
 <br/>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.FieldId }) |
-    @Html.ActionLink("Back to List", "Details", "Client", new { id = Model.ClientId }, null)
+    @Html.ActionLink("Editar", "Edit", new { id = Model.FieldId }) |
+    @Html.ActionLink("Voltar para a lista", "Details", "Client", new { id = Model.ClientId }, null)
 </p>
 

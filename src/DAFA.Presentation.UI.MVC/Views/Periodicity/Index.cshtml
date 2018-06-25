@@ -3,14 +3,14 @@
 @using DAFA.Domain.ValueObjects
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Índice";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Índice</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Adicionar Novo", "Create")
 </p>
 <table class="table">
     <tr>
@@ -44,8 +44,8 @@
             @Html.DisplayFor(modelItem => item.Active)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PeriodicityId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.PeriodicityId })
+            @Html.ActionLink("Editar", "Edit", new { id=item.PeriodicityId }) |
+            @Html.ActionLink("Detalhes", "Details", new { id = item.PeriodicityId })
         </td>
     </tr>
 }

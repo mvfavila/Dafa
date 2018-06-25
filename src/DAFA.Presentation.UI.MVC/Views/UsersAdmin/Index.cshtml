@@ -1,10 +1,10 @@
 ﻿@model List<DAFA.Application.ViewModels.UserEmployeeProviderViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Índice";
 }
 
-<h2>Index</h2>
+<h2>Índice</h2>
 
 <p>
     @Html.ActionLink("Add new", "Create")
@@ -26,8 +26,8 @@
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
+                @Html.ActionLink("Editar", "Edit", new { id = item.UserId }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.UserId }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
             </td>
         </tr>
