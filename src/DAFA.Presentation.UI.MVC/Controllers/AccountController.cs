@@ -12,6 +12,8 @@ using System.Web.Mvc;
 using System;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Security.Claims;
+using DAFA.Infra.CrossCutting.Logging;
+using DAFA.Presentation.UI.MVC.Util;
 
 namespace DAFA.Presentation.UI.MVC.Controllers
 {
@@ -59,10 +61,14 @@ namespace DAFA.Presentation.UI.MVC.Controllers
                     }
                     await SignInAsync(user, model.RememberMe);
 
+                    Log.Info($"Login usuário: {UtilString.AddEmailMask(user.Email)}");
+
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
+                    Log.Info($"Usuário bloqueado: {UtilString.AddEmailMask(model.Email)}");
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
+                    Log.Info($"Usuário a ser verificado: {UtilString.AddEmailMask(model.Email)}");
                     return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl });
                 case SignInStatus.Failure:
                 default:

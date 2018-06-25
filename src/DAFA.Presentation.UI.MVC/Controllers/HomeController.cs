@@ -26,6 +26,7 @@ namespace DAFA.Presentation.UI.MVC.Controllers
             }
 
             var eventWarnings = eventWarningAppService.GetUnsolved();
+
             return View(eventWarnings);
         }
 

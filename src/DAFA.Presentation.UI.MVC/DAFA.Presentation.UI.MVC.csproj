@@ -53,6 +53,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -220,6 +223,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Util\UtilString.cs" />
     <Compile Include="ViewModels\Account\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="ViewModels\Account\ExternalLoginListViewModel.cs" />
     <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
@@ -456,6 +460,10 @@
     <ProjectReference Include="..\DAFA.Infra.CrossCutting.Identity\DAFA.Infra.CrossCutting.Identity.csproj">
       <Project>{95A34CFD-7D6F-453E-BA00-68E4AD1DAE82}</Project>
       <Name>DAFA.Infra.CrossCutting.Identity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAFA.Infra.CrossCutting.Logging\DAFA.Infra.CrossCutting.Logging.csproj">
+      <Project>{091A95AA-F45E-4007-9532-9CB7E1B582F5}</Project>
+      <Name>DAFA.Infra.CrossCutting.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\DAFA.Infra.CrossCutting.MvcFilters\DAFA.Infra.CrossCutting.MvcFilters.csproj">
       <Project>{A9E36224-67BD-4B08-8FF3-C9721256A8EF}</Project>

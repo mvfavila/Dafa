@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAFA.Infra.CrossCutting.Ide
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAFA.Infra.CrossCutting.MvcFilters", "src\DAFA.Infra.CrossCutting.MvcFilters\DAFA.Infra.CrossCutting.MvcFilters.csproj", "{A9E36224-67BD-4B08-8FF3-C9721256A8EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAFA.Infra.CrossCutting.Logging", "src\DAFA.Infra.CrossCutting.Logging\DAFA.Infra.CrossCutting.Logging.csproj", "{091A95AA-F45E-4007-9532-9CB7E1B582F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{A9E36224-67BD-4B08-8FF3-C9721256A8EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9E36224-67BD-4B08-8FF3-C9721256A8EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9E36224-67BD-4B08-8FF3-C9721256A8EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{091A95AA-F45E-4007-9532-9CB7E1B582F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{091A95AA-F45E-4007-9532-9CB7E1B582F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{091A95AA-F45E-4007-9532-9CB7E1B582F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{091A95AA-F45E-4007-9532-9CB7E1B582F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,9 +99,10 @@ Global
 		{CC8776E9-7E56-4944-8E73-915024F77415} = {44D68367-DC16-47B3-80B0-38B1A502F9C8}
 		{95A34CFD-7D6F-453E-BA00-68E4AD1DAE82} = {44D68367-DC16-47B3-80B0-38B1A502F9C8}
 		{A9E36224-67BD-4B08-8FF3-C9721256A8EF} = {44D68367-DC16-47B3-80B0-38B1A502F9C8}
+		{091A95AA-F45E-4007-9532-9CB7E1B582F5} = {44D68367-DC16-47B3-80B0-38B1A502F9C8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
 		SolutionGuid = {0E1E4B21-021E-432F-8D4F-A60070A71357}
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
 	EndGlobalSection
 EndGlobal

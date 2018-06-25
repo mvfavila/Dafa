@@ -1,5 +1,7 @@
 ﻿using DAFA.Application.Interfaces;
+using DAFA.Infra.CrossCutting.Logging;
 using DAFA.Infra.CrossCutting.MvcFilters;
+using DAFA.Presentation.UI.MVC.Util;
 using System;
 using System.Net;
 using System.Web.Mvc;
@@ -33,6 +35,11 @@ namespace DAFA.Presentation.UI.MVC.Controllers
 
             eventWarningViewModel.Solved = true;
             eventWarningViewModel.SolvedDate = DateTime.Now;
+
+            Log.Info($@"Usuário '{UtilString.AddEmailMask(User.Identity.Name)}' marcou o aviso abaixo como solucionado.
+                Nome do evento: {eventWarningViewModel.Event.Name}
+                Descrição: {eventWarningViewModel.Event.Description}
+                Data: {eventWarningViewModel.Date}");
 
             eventWarningAppService.Update(eventWarningViewModel);
 
