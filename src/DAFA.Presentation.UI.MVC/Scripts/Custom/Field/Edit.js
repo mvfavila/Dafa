@@ -15,27 +15,8 @@ var FieldViewModel = function () {
     GetField();
     GetEventTypes();
 
-    var field = {
-        FieldId: self.FieldId,
-        Name: self.FieldName,
-        Events: self.Events(),
-        Active: self.Active,
-        ClientId: self.ClientId
-    };
-
     self.save = function () {
-        $.ajax({
-            type: "POST",
-            url: '/Field/Edit',
-            data: ko.toJS(field),
-            dataType: "json",
-            success: function (data) {
-                alert("Data Saved");
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("some error");
-            }
-        });
+        saveField(self.FieldId, self.FieldName, self.Events(), self.Active, self.ClientId);        
     };
 
     self.Name = "";
@@ -61,6 +42,29 @@ var FieldViewModel = function () {
         self.Events.remove(row);
     };
 };
+
+function saveField(fieldId, fieldName, events, active, clientId) {
+    var field = {
+        FieldId: fieldId,
+        Name: fieldName,
+        Events: events,
+        Active: active,
+        ClientId: clientId
+    };
+
+    $.ajax({
+        type: "POST",
+        url: '/Field/Edit',
+        data: ko.toJS(field),
+        dataType: "json",
+        success: function (data) {
+            alert("Data Saved");
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("some error");
+        }
+    });
+}
 
 function EventObj(id, name, description, date, type, fieldId) {
     var self = this;
