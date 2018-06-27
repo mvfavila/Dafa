@@ -19,15 +19,8 @@ var FieldViewModel = function () {
         saveField(self.FieldId, self.FieldName, self.Events(), self.Active, self.ClientId);        
     };
 
-    self.Name = "";
-    self.Description = "";
-    self.Date = "";
-    self.EventTypeId = "";
-
     self.addEvent = function () {
-        var eventId = uuidv4();
-        self.Events.push(ko.utils.extend({},
-            new EventObj(eventId, self.Name, self.Description, self.Date, self.EventTypeId, self.FieldId)));
+        addNewEvent(self.FieldId, self.Events);
     };
 
     self.addEventObj = function (eventId, name, description, date, type, fieldId) {
@@ -64,6 +57,11 @@ function saveField(fieldId, fieldName, events, active, clientId) {
             alert("some error");
         }
     });
+}
+
+function addNewEvent(fieldId, eventsList) {
+    var eventId = uuidv4();
+    eventsList.push(ko.utils.extend({}, new EventObj(eventId, "", "", "", "", fieldId)));
 }
 
 function EventObj(id, name, description, date, type, fieldId) {
