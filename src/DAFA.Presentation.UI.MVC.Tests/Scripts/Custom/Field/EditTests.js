@@ -32,12 +32,12 @@ describe('addNewEvent', function () {
         expect(selectedEventsLength).toBe(1);
     });
 
-    //it('Event must be added to the end of the list', function () {
-    //    // Act
-    //    addNewEvent(fieldId, eventsList);
-    //    var unwrappedList = eventsList();
-    //    var lastEntry = unwrappedList[unwrappedList.length - 1];
-    //    // Assert
-    //    expect(lastEntry.FieldId).toBe(fieldId);
-    //});
+    it('Event must be added to the end of the list', function () {
+        // Act
+        addNewEvent(fieldId, eventsList);
+        var unwrappedList = eventsList();
+        var lastEntry = unwrappedList[unwrappedList.length - 1];
+        // Assert
+        expect(lastEntry.FieldId).toBe(fieldId);
+    });
 });
